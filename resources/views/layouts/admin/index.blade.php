@@ -8,6 +8,7 @@
     @include('layouts.admin.component.header')
 
     @include('layouts.admin.component.sidebar')
+    @include('sweetalert::alert')
 
     <main id="main" class="main">
 

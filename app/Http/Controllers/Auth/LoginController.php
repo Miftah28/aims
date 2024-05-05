@@ -58,11 +58,21 @@ class LoginController extends Controller
             $user = auth()->user();
             if ($user->status === 'aktif') {
                 if (auth()->user()->role == 'superadmin') {
-                    alert()->toast('Welcome <b>' . $user->superadmin->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
-                    return redirect()->route('home');
+                    if ($input['password'] === '123456789') {
+                        alert()->warning('Warning', 'Anda harus mengubah password terlebih dahulu.');
+                        return redirect()->route('SuperAdmin.profile.index'); // Ganti dengan nama route untuk mengubah password
+                    } else {
+                        alert()->toast('Welcome <b>' . $user->superadmin->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
+                        return redirect()->route('home');
+                    }
                 } else if (auth()->user()->role == 'admin') {
-                    alert()->toast('Welcome <b>' . $user->admin->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
-                    return redirect()->route('home');
+                    if ($input['password'] === '123456789') {
+                        alert()->warning('Warning', 'Anda harus mengubah password terlebih dahulu.');
+                        return redirect()->route('home'); // Ganti dengan nama route untuk mengubah password
+                    } else {
+                        alert()->toast('Welcome <b>' . $user->admin->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
+                        return redirect()->route('home');
+                    }
                 }
             } elseif ($user->status === 'tidak aktif') {
                 auth()->logout(); // Log out the user
@@ -82,9 +92,9 @@ class LoginController extends Controller
             // Cek apakah username ada dalam database
             $user = User::where('username', $input['username'])->first();
             if ($user) {
-                alert()->toast('Password salah', 'error')->position('top-end');
+                alert()->toast('Username/Email dan Password anda salah', 'error')->position('top-end');
             } else {
-                alert()->toast('Username/email dan password salah, Silakan Anda Daftar Dahulu', 'error')->position('top-end');
+                alert()->toast('Akun Anda Tidak Ditemukan, Silakan Anda Daftar Dahulu', 'error')->position('top-end');
             }
             return redirect()->route('login');
         }

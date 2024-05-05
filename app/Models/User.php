@@ -51,4 +51,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Admin');
     }
+    public function petugas()
+    {
+        return $this->hasOne('App\Models\Petugas');
+    }
+    public function nasabah()
+    {
+        return $this->hasOne('App\Models\Nasabah');
+    }
 }
