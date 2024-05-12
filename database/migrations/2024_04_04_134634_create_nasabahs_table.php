@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->string('alamat');
+            $table->longText('alamat');
             $table->string('no_hp')->unique();
+            $table->char('kode_pengguna', 12)->unique();
             $table->timestamps();
             $table->softDeletes();
 

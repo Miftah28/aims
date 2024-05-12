@@ -13,6 +13,7 @@ class Nasabah extends Model
         'name',
         'alamat',
         'no_hp',
+        'kode_pengguna',
     ];
     public function user()
     {

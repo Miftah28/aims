@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('petugas', function (Blueprint $table) {
+        Schema::create('jadwal_tugas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('lokasi_id');
             $table->unsignedBigInteger('admin_id');
-            $table->string('name');
-            $table->string('no_hp')->unique();
-            $table->longText('alamat');
+            $table->dateTime('mulai_penjemputan');
+            $table->dateTime('selesai_penjemputan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
+            $table->foreign('lokasi_id')->references('id')->on('lokasis')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('petugas');
+        Schema::dropIfExists('jadwal_tugas');
     }
 };

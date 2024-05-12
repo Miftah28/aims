@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('poin_nasabahs', function (Blueprint $table) {
+        Schema::create('lokasis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nasabah_id');
-            $table->integer('total');
-            $table->dateTime('tanggal');
+            $table->unsignedBigInteger('admin_id');
+            $table->longText('tempat');
+            $table->char('koordinat');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('nasabah_id')->references('id')->on('nasabahs')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('poin_nasabahs');
+        Schema::dropIfExists('lokasis');
     }
 };

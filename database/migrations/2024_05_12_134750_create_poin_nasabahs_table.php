@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lokasis', function (Blueprint $table) {
+        Schema::create('poin_nasabahs', function (Blueprint $table) {
             $table->id();
-            $table->string('tempat');
+            $table->unsignedBigInteger('nasabah_id');
+            $table->integer('total');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('nasabah_id')->references('id')->on('nasabahs')->onDelete('cascade');
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lokasis');
+        Schema::dropIfExists('poin_nasabahs');
     }
 };

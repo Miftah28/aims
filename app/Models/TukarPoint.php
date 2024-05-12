@@ -12,6 +12,7 @@ class TukarPoint extends Model
         'kategori_sampah_id',
         'petugas_id',
         'nasabah_id',
+        'lokasi_id',
         'tanggal',
         'status',
         'tammbah_poin',
@@ -28,5 +29,9 @@ class TukarPoint extends Model
     public function nasabah()
     {
         return $this->belongsTo('App\Models\Nasabah');
+    }
+    public function lokasi()
+    {
+        return $this->belongsTo('App\Models\Lokasi');
     }
 }

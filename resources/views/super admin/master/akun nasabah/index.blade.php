@@ -60,6 +60,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center" scope="col">Nama</th>
+                                <th class="text-center" scope="col">Id Pengguna</th>
                                 <th class="text-center" scope="col">Email</th>
                                 <th class="text-center" scope="col">Alamat</th>
                                 <th class="text-center" scope="col">No Telepon</th>
@@ -70,6 +71,7 @@
                             @forelse ($akun as $akuns)
                             <tr>
                                 <td>{{$akuns->name}}</td>
+                                <td>{{$akuns->kode_pengguna}}</td>
                                 <td>{{$akuns->user->username}}</td>
                                 <td>{{$akuns->alamat}}</td>
                                 <td>{{$akuns->no_hp}}</td>

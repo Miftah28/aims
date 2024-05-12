@@ -9,8 +9,13 @@ class KategoriSampah extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'admin_id',
         'jenis_sampah',
         'poin_sampah',
         'berat_sampah',
     ];
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin');
+    }
 }

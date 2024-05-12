@@ -13,15 +13,19 @@ return new class extends Migration
     {
         Schema::create('sampahs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lokasi_id');
+            $table->unsignedBigInteger('lokasi_id')->nullable();
+            $table->unsignedBigInteger('kategori_sampah_id');
             $table->unsignedBigInteger('petugas_id')->nullable();
+            $table->unsignedBigInteger('admin_id')->nullable();
             $table->unsignedBigInteger('nasabah_id')->nullable();
             $table->integer('pemasukan_sampah');
             $table->dateTime('tanggal');
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('kategori_sampah_id')->references('id')->on('kategori_sampahs')->onDelete('cascade');
             $table->foreign('lokasi_id')->references('id')->on('lokasis')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade');
             $table->foreign('nasabah_id')->references('id')->on('nasabahs')->onDelete('cascade');
         });

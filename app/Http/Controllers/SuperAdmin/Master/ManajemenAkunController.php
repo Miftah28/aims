@@ -220,6 +220,7 @@ class ManajemenAkunController extends Controller
         }
         return redirect()->route('SuperAdmin.master.akun.index');
     }
+
     public function updatepetugas(Request $request, $id)
     {
         // dd(Crypt::decrypt($id));
@@ -339,9 +340,9 @@ class ManajemenAkunController extends Controller
         if ($user->role === 'superadmin') {
             // dd($superadmin);
             if ($user->update($params)) {
-                alert()->success('Success', $superadmin->name . ' Telah di Nonaktifkan');
+                alert()->success('Success', $superadmin->name . ' Telah di Aktifkan');
             } else {
-                alert()->error('Error', $superadmin->name . ' Gagal di Nonaktifkan');
+                alert()->error('Error', $superadmin->name . ' Gagal di Aktifkan');
             }
             return redirect()->route('SuperAdmin.master.akun.index');
         } else if ($user->role === 'admin') {
@@ -353,18 +354,18 @@ class ManajemenAkunController extends Controller
                     $cariuserpetugas = User::where('id', $caripetugass->user_id)->first();
                     $cariuserpetugas->update($params);
                 }
-                alert()->success('Success', 'Instansi ' . $admin->instansi . ' Telah di Nonaktifkan');
+                alert()->success('Success', 'Instansi ' . $admin->instansi . ' Telah di Aktifkan');
             } else {
-                alert()->error('Error', 'Instansi' . $admin->instansi . ' Telah di Nonaktifkan');
+                alert()->error('Error', 'Instansi' . $admin->instansi . ' Telah di Aktifkan');
             }
             return redirect()->route('SuperAdmin.master.akun.index');
             // dd($caripetugas);
         } else if ($user->role === 'petugas') {
             // dd($petugas);
             if ($user->update($params)) {
-                alert()->success('Success', $petugas->name . ' Telah di Nonaktifkan');
+                alert()->success('Success', $petugas->name . ' Telah di Aktifkan');
             } else {
-                alert()->error('Error', $petugas->name . ' Gagal di Nonaktifkan');
+                alert()->error('Error', $petugas->name . ' Gagal di Aktifkan');
             }
             return redirect()->route('SuperAdmin.master.akun.index');
         }
@@ -376,11 +377,11 @@ class ManajemenAkunController extends Controller
         $data['akun'] = $akun;
         return view('super admin.master.akun nasabah.index', $data);
     }
+
     public function storenasabah(Request $request)
     {
         $request->validate([
             'username' => 'required|string|max:255',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
         ]);
 
         $params1 = $request->all();
@@ -390,14 +391,10 @@ class ManajemenAkunController extends Controller
             'role' => 'nasabah',
             'status' => 'aktif',
         ];
-
-        // if ($request->has('image')) {
-        //     $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
-        // }
-
         $user = User::create($params2);
         if ($user) {
             $params1['user_id'] = $user->id;
+            $params1['kode_pengguna'] = generateRandomCode(12);
             $nasabah = Nasabah::create($params1);
             if ($nasabah) {
                 alert()->success('Success', 'Data Berhasil Disimpan');
@@ -437,17 +434,6 @@ class ManajemenAkunController extends Controller
             $params2 = $request->except('password');
         }
 
-        // if ($request->hasFile('image')) {
-        //     $file = $request->file('image');
-        //     if ($file->isValid()) {
-        //         $params1['image'] = $this->simpanImage($params2['role'], $file, $params1['name']);
-        //     } else {
-        //         return redirect()->back()->with('error', 'File foto tidak valid');
-        //     }
-        // } else {
-        //     $params1 = $request->except('image');
-        // }
-        // $cari = Petugas::where('user_id', Crypt::decrypt($id))->first();
         $nasabah = Nasabah::findOrFail(Crypt::decrypt($id));
         $user = User::findOrFail($nasabah->user_id);
         if ($nasabah->update($params1) && $user->update($params2)) {
@@ -460,15 +446,8 @@ class ManajemenAkunController extends Controller
     }
     public function destroynasabah($id)
     {
-        // dd('hallo');
         $nasabah = Nasabah::findOrFail(Crypt::decrypt($id));
-        // $url = $nasabah->image;
-        // $dir = public_path('storage/' . substr($url, 0, strrpos($url, '/')));
-        // $path = public_path('storage/' . $url);
 
-        // File::delete($path);
-
-        // rmdir($dir);
         if ($nasabah->delete()) {
             $user = User::findOrFail($nasabah->user_id);
             $user->delete();

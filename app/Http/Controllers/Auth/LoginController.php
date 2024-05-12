@@ -68,7 +68,7 @@ class LoginController extends Controller
                 } else if (auth()->user()->role == 'admin') {
                     if ($input['password'] === '123456789') {
                         alert()->warning('Warning', 'Anda harus mengubah password terlebih dahulu.');
-                        return redirect()->route('home'); // Ganti dengan nama route untuk mengubah password
+                        return redirect()->route('Admin.profile.index'); // Ganti dengan nama route untuk mengubah password
                     } else {
                         alert()->toast('Welcome <b>' . $user->admin->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
                         return redirect()->route('home');

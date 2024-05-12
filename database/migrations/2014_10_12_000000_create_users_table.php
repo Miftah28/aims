@@ -18,6 +18,7 @@ return new class extends Migration
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status');
+            // $table->integer('kode_verifikasi')->nullable();
             $table->char('role', 20);
             $table->rememberToken();
             $table->timestamps();

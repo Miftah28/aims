@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class JawdalTugas extends Model
+class JadwalTugas extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
@@ -16,7 +16,8 @@ class JawdalTugas extends Model
     protected $fillable = [
         'petugas_id',
         'lokasi_id',
-        'tanggal',
+        'mulai_penjemputan',
+        'selesai_penjemputan',
         'keterangan',
     ];
     public function petugas()

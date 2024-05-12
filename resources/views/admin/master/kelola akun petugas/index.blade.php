@@ -63,6 +63,7 @@
                                 <th class="text-center" scope="col">Email</th>
                                 <th class="text-center" scope="col">Alamat</th>
                                 <th class="text-center" scope="col">No Telepon</th>
+                                <th class="text-center" scope="col">Status</th>
                                 <th class="text-center" scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -73,10 +74,33 @@
                                 <td>{{$akuns->user->username}}</td>
                                 <td>{{$akuns->alamat}}</td>
                                 <td>{{$akuns->no_hp}}</td>
-                                <td><a href="#edit{{ $akuns->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
-                                    class="bi bi-pencil-square"></i></a>
-                            <a href="#delete{{ $akuns->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
-                                    class="bi bi-trash"></i></a></td>
+                                @if ($akuns->user->status == 'aktif')
+                                <td class="text-center">
+                                    <a
+                                        href="{{route('Admin.master.akun-petugas.unverifikasistatus', Crypt::encrypt($akuns->id))}}"><span
+                                            class="badge bg-success"><i class="bi bi-check-circle me-1"></i>
+                                            Aktif</span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#edit{{ $akuns->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
+                                            class="bi bi-pencil-square"></i></a>
+                                    <a href="#delete{{ $akuns->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></a>
+                                </td>
+                                @elseif($akuns->user->status == 'tidak aktif')
+                                <td class="text-center">
+                                    <a
+                                        href="{{route('Admin.master.akun-petugas.verifikasistatus', Crypt::encrypt($akuns->id))}}"><span
+                                            class="badge bg-danger"><i class="bi bi-exclamation-octagon me-1"></i>
+                                            Tidak Aktif</span></a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#edit{{ $akuns->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
+                                            class="bi bi-pencil-square"></i></a>
+                                    <a href="#delete{{ $akuns->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></a>
+                                </td>
+                                @endif
                             </tr>
                             @empty
                             <tr>
@@ -92,7 +116,6 @@
     </div>
 </section>
 
-@include('super admin.master.akun nasabah.modal')
-{{-- @include('super admin.master.akun.js') --}}
+@include('admin.master.kelola akun petugas.modal')
 
 @endsection

@@ -9,6 +9,12 @@ class Lokasi extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tempat'
+        'admin_id',
+        'tempat',
+        'koordinat',
     ];
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin');
+    }
 }
