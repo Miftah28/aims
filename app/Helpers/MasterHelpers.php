@@ -1,10 +1,16 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\Nasabah;
 use App\Models\Petugas;
+use App\Models\PetugasJemput;
+use App\Models\PoinNasabah;
+use App\Models\Point;
 use App\Models\SuperAdmin;
 use App\Models\User;
 use Carbon\Carbon;
+
+use function PHPUnit\Framework\isEmpty;
 
 if (!function_exists('datapetugas')) {
     function datapetugas($idadmin)
@@ -49,6 +55,38 @@ if (!function_exists('datamintaverifikasi')) {
     function datamintaverifikasi()
     {
         $results = User::where('role', 'admin')->where('status', 'prosess')->orderBy('id', 'asc')->get();
+        return $results;
+    }
+}
+if (!function_exists('datajadwal')) {
+    function datajadwal($jadwalid)
+    {
+        $results = PetugasJemput::where('jadwal_tugas_id', $jadwalid)->get();
+
+        return $results;
+    }
+}
+if (!function_exists('poinsampah')) {
+    function poinsampah($jenisSampahId)
+    {
+        $results = Point::where('kategori_sampah_id', $jenisSampahId)->first();
+
+        return $results;
+    }
+}
+if (!function_exists('poinnasabah')) {
+    function poinnasabah($nasabahId)
+    {
+        $results = PoinNasabah::where('nasabah_id', $nasabahId)->first();
+
+        return $results;
+    }
+}
+if (!function_exists('carinasabah')) {
+    function carinasabah($nasabahId)
+    {
+        $results = Nasabah::where('id', $nasabahId)->first();
+
         return $results;
     }
 }

@@ -9,18 +9,25 @@ class TukarPoint extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'sampah_id',
         'kategori_sampah_id',
         'petugas_id',
         'nasabah_id',
         'lokasi_id',
+        'admin_id',
         'tanggal',
         'status',
-        'tammbah_poin',
+        'instansi',
+        'tambah_poin',
         'kurang_poin',
     ];
     public function ketegoriSampah()
     {
         return $this->belongsTo('App\Models\KetegoriSampah');
+    }
+    public function sampah()
+    {
+        return $this->belongsTo('App\Models\Sampah');
     }
     public function petugas()
     {
@@ -33,5 +40,9 @@ class TukarPoint extends Model
     public function lokasi()
     {
         return $this->belongsTo('App\Models\Lokasi');
+    }
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin');
     }
 }

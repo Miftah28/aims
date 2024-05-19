@@ -71,7 +71,7 @@ class LoginController extends Controller
                         return redirect()->route('Admin.profile.index'); // Ganti dengan nama route untuk mengubah password
                     } else {
                         alert()->toast('Welcome <b>' . $user->admin->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
-                        return redirect()->route('home');
+                        return redirect()->route('home')->with('success', 'success');
                     }
                 }
             } elseif ($user->status === 'tidak aktif') {

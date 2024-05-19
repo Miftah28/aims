@@ -14,18 +14,21 @@ return new class extends Migration
         Schema::create('tukar_points', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kategori_sampah_id');
+            $table->unsignedBigInteger('sampah_id');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->unsignedBigInteger('petugas_id')->nullable();
             $table->unsignedBigInteger('lokasi_id')->nullable();
             $table->unsignedBigInteger('nasabah_id');
             $table->dateTime('tanggal');
             $table->string('status');
+            $table->string('instansi');
             $table->integer('tambah_poin')->nullable();
             $table->integer('kurang_poin')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('kategori_sampah_id')->references('id')->on('kategori_sampahs')->onDelete('cascade');
+            $table->foreign('sampah_id')->references('id')->on('sampahs')->onDelete('cascade');
             $table->foreign('nasabah_id')->references('id')->on('nasabahs')->onDelete('cascade');
             $table->foreign('petugas_id')->references('id')->on('petugas')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');

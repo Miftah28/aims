@@ -12,6 +12,19 @@
                     {{ csrf_field() }}
                     <div class="container">
                         <div class="row justify-content-start">
+                            <div class="col-12 mb-3">
+                                <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
+                                    Jenis Sampah</label>
+                                <select class="selectpicker" data-live-search="true" data-width="100%"
+                                    name="kategori_sampah_id">
+                                    <option value="">Pilih Jenis Sampah </option>
+                                    @forelse ($kategori as $kategoris)
+                                    <option value="{{ $kategoris->id }}">{{ $kategoris->jenis_sampah }}</option>
+                                    @empty
+                                    <option value="NULL">Jenis Sampah belum diinput</option>
+                                    @endforelse
+                                </select>
+                            </div>
                             <div class="col-6 mb-3">
                                 <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span>
                                     Jumlah Poin</label>
@@ -52,6 +65,22 @@
                     {{ method_field('PUT') }}
                     <div class="container">
                         <div class="row justify-content-start">
+                            <div class="col-12 mb-3">
+                                <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
+                                    Jenis Sampah</label>
+                                <select class="selectpicker" data-live-search="true" data-width="100%" name="kategori_sampah_id"
+                                    id="kategori_sampah_id" required>
+                                    <option value="">Pilih Jenis Sampah</option>
+                                    @forelse ($kategori as $kategoris)
+                                    <option value="{{ $kategoris->id }}" {{ $poins->kategori_sampah_id == $kategoris->id ? 'selected' :
+                                        ''
+                                        }}>
+                                        {{ $kategoris->jenis_sampah }}</option>
+                                    @empty
+                                    <option value="NULL">Jenis Sampah belum diinput</option>
+                                    @endforelse
+                                </select>
+                            </div>
                             <div class="col-6 mb-3">
                                 <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span>
                                     Jumlah Poin</label>
@@ -65,15 +94,16 @@
                                     value="{{ $poins->jumlah_saldo }}">
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-success">Simpan</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Simpan</button>
                     </div>
             </div>
-            </form>
         </div>
+        </form>
     </div>
+</div>
 </div><!-- End edit kelola poin Modal-->
 
 <!-- delete kelola poin -->
@@ -91,7 +121,8 @@
                     @method('DELETE')
                     <h4 class="text-center">Apakah Anda Yakin Menghapus Data Ini?</h4>
                     <h5 class="text-center">Jumlah Poin: {{ $poins->jumlah_poin }} </h5>
-                    <h5 class="text-center">Jumlah Saldo: Rp. {{ number_format($poins->jumlah_saldo, 0, ',', '.') }} </h5>
+                    <h5 class="text-center">Jumlah Saldo: Rp. {{ number_format($poins->jumlah_saldo, 0, ',', '.') }}
+                    </h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>

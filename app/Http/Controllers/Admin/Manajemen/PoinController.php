@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Manajemen;
 
 use App\Http\Controllers\Controller;
+use App\Models\KategoriSampah;
 use App\Models\Point;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,14 +14,18 @@ class PoinController extends Controller
     public function index()
     {
         $poin = Point::where('admin_id', Auth::user()->admin->id)->get();
-        $data['poin'] = $poin;
+        $kategori = KategoriSampah::where('admin_id', Auth::user()->admin->id)->get();
+        $data = [
+            'poin' => $poin,
+            'kategori' => $kategori,
+        ];
         return view('admin/manajemen sampah/kelola poin/index', $data);
     }
     public function store(Request $request)
     {
         $request->validate(
             [
-                'jumlah_poin'  => 'required|integer|max:1000',
+                'jumlah_poin'  => 'required|integer|max:10000000',
                 'jumlah_saldo'  => 'required|integer|max:10000000',
             ]
         );
@@ -37,7 +42,7 @@ class PoinController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jumlah_poin'  => 'required|integer|max:1000',
+            'jumlah_poin'  => 'required|integer|max:10000000',
             'jumlah_saldo'  => 'required|integer|max:10000000',
         ]);
         $params = $request->all();

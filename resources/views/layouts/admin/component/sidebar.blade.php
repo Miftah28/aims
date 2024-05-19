@@ -58,13 +58,13 @@
         </li><!-- End Home Nav -->
 
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('home') ? '' : 'collapsed' }}" href="{{ route('home') }}">
+            <a class="nav-link {{ request()->is('admin/penukaran-poin') ? '' : 'collapsed' }}" href="{{ route('Admin.penukaran-poin.index') }}">
                 <i class="bi bi-grid"></i>
                 <span>Penukaran poin</span>
             </a>
         </li><!-- End penukaaran poin Nav -->
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('home') ? '' : 'collapsed' }}" href="{{ route('home') }}">
+            <a class="nav-link {{ request()->is('admin/pemasukan-sampah') ? '' : 'collapsed' }}" href="{{ route('Admin.pemasukan-sampah.index') }}">
                 <i class="bi bi-grid"></i>
                 <span>Pemasukan Sampah</span>
             </a>

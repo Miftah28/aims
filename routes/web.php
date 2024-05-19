@@ -7,12 +7,12 @@ use App\Http\Controllers\Admin\Manajemen\PoinController;
 use App\Http\Controllers\Admin\Manajemen\TugasPetugasController;
 use App\Http\Controllers\Admin\Master\ManajemenPetugasController;
 use App\Http\Controllers\Admin\Master\MonitoringDataController;
+use App\Http\Controllers\Admin\PemasukanSampahController;
 use App\Http\Controllers\Admin\PenukaranPoinController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SuperAdmin\ProfileController as superadminprofileController;
 use App\Http\Controllers\SuperAdmin\Master\ManajemenAkunController;
-use App\Http\Controllers\SuperAdmin\Master\MonitoringSampahController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -69,9 +69,14 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     // penukaran poin
     Route::get('admin/penukaran-poin', [PenukaranPoinController::class, 'index'])->name('Admin.penukaran-poin.index');
-    Route::post('admin/penukaran-poin', [PenukaranPoinController::class, 'store'])->name('Admin.penukaran-poin.store');
-    Route::put('admin/penukaran-poin/{id}', [PenukaranPoinController::class, 'update'])->name('Admin.penukaran-poin.update');
-    Route::delete('admin/penukaran-poin/{id}', [PenukaranPoinController::class, 'destroy'])->name('Admin.penukaran-poin.destroy');
+    Route::post('admin/penukaran-poin', [PenukaranPoinController::class, 'tukar'])->name('Admin.penukaran-poin.tukar');
+    Route::get('/get-nasabah-total-poin/{id}', [PenukaranPoinController::class, 'getTotalPoin']);
+
+    // Pemasukan Sampah
+    Route::get('admin/pemasukan-sampah', [PemasukanSampahController::class, 'index'])->name('Admin.pemasukan-sampah.index');
+    Route::post('admin/pemasukan-sampah', [PemasukanSampahController::class, 'store'])->name('Admin.pemasukan-sampah.store');
+    Route::put('admin/pemasukan-sampah/{id}', [PemasukanSampahController::class, 'update'])->name('Admin.pemasukan-sampah.update');
+    Route::delete('admin/pemasukan-sampah/{id}', [PemasukanSampahController::class, 'destroy'])->name('Admin.pemasukan-sampah.destroy');
 
     // master
     //  kelola akun petugas
@@ -123,7 +128,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('admin/manajemen-sampah/kelola-jadwal/{id}', [JadwalTugasController::class, 'destroy'])->name('Admin.manajemen-sampah.kelola-jadwal.destroy');
     //  kelola tugas pada petugas
     Route::get('admin/manajemen-sampah/kelola-tugas', [TugasPetugasController::class, 'index'])->name('Admin.manajemen-sampah.kelola-tugas.index');
-    Route::post('admin/manajemen-sampah/kelola-tugas', [TugasPetugasController::class, 'store'])->name('Admin.manajemen-sampah.kelola-tugas.store');
+    Route::post('admin/manajemen-sampah/kelola-tugas{id}', [TugasPetugasController::class, 'store'])->name('Admin.manajemen-sampah.kelola-tugas.store');
     Route::put('admin/manajemen-sampah/kelola-tugas/{id}', [TugasPetugasController::class, 'update'])->name('Admin.manajemen-sampah.kelola-tugas.update');
     Route::delete('admin/manajemen-sampah/kelola-tugas/{id}', [TugasPetugasController::class, 'destroy'])->name('Admin.manajemen-sampah.kelola-tugas.destroy');
 

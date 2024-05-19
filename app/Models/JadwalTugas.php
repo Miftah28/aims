@@ -14,15 +14,15 @@ class JadwalTugas extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'petugas_id',
+        'admin_id',
         'lokasi_id',
         'mulai_penjemputan',
         'selesai_penjemputan',
         'keterangan',
     ];
-    public function petugas()
+    public function admin()
     {
-        return $this->belongsTo('App\Models\Petugas');
+        return $this->belongsTo('App\Models\Admin');
     }
     public function lokasi()
     {

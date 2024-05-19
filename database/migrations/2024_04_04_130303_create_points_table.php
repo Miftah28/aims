@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('kategori_sampah_id');
             $table->integer('jumlah_poin');
             $table->integer('jumlah_saldo');
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('kategori_sampah_id')->references('id')->on('kategori_sampahs')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
         });
     }

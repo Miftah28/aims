@@ -41,9 +41,15 @@
                             @forelse ($jadwal as $jadwals)
                             <tr>
                                 <td scope="row">{{ $loop->iteration }}</td>
-                                <td>{{$jadwals->jenis_sampah}}</td>
-                                <td class="text-center">{{$jadwals->berat_sampah}} KG</td>
-                                <td class="text-center">{{$jadwals->poin_sampah}}</td>
+                                <td>{{$jadwals->lokasi->tempat}}</td>
+                                <td class="text-center">
+                                    Mulai Penjemputan: {{ date('H:i', strtotime($jadwals->mulai_penjemputan)) }} {{
+                                    date('d F Y', strtotime($jadwals->mulai_penjemputan)) }}
+                                    <br>
+                                    Selesai Penjemputan: {{ date('H:i', strtotime($jadwals->selesai_penjemputan)) }} {{
+                                    date('d F Y', strtotime($jadwals->selesai_penjemputan)) }}
+                                </td>
+                                <td class="text-center">{{$jadwals->keterangan}}</td>
                                 <td class="text-center">
                                     <a href="#edit{{ $jadwals->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
                                             class="bi bi-pencil-square"></i></a>
@@ -66,5 +72,44 @@
 </section>
 
 @include('admin.manajemen sampah.kelola jadwal penjemputan.modal')
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mulaiPenjemputanInput = document.getElementById("mulai_penjemputan");
+        const selesaiPenjemputanInput = document.getElementById("selesai_penjemputan");
+
+        selesaiPenjemputanInput.addEventListener("change", function () {
+            const mulaiPenjemputanValue = new Date(mulaiPenjemputanInput.value);
+            const selesaiPenjemputanValue = new Date(selesaiPenjemputanInput.value);
+
+            if (selesaiPenjemputanValue < mulaiPenjemputanValue) {
+                alert("Selesai Penjemputan tidak boleh kurang dari Mulai Penjemputan");
+                selesaiPenjemputanInput.value = ""; // Kosongkan input jika tidak valid
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        @if(isset($jadwals))
+            const mulaiPenjemputanInput = document.getElementById("mulai_penjemputanedit{{ $jadwals->id }}");
+            const selesaiPenjemputanInput = document.getElementById("selesai_penjemputanedit{{ $jadwals->id }}");
+
+            if (mulaiPenjemputanInput && selesaiPenjemputanInput) {
+                selesaiPenjemputanInput.addEventListener("change", function () {
+                    const mulaiPenjemputanValue = new Date(mulaiPenjemputanInput.value);
+                    const selesaiPenjemputanValue = new Date(selesaiPenjemputanInput.value);
+
+                    if (selesaiPenjemputanValue < mulaiPenjemputanValue) {
+                        alert("Selesai Penjemputan tidak boleh kurang dari Mulai Penjemputan");
+                        selesaiPenjemputanInput.value = ""; // Kosongkan input jika tidak valid
+                    }
+                });
+            }
+        @endif
+    });
+</script>
 
 @endsection

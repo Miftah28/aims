@@ -8,6 +8,7 @@ use App\Mail\VerifikasiAkun;
 use App\Models\Admin;
 use App\Models\Nasabah;
 use App\Models\Petugas;
+use App\Models\PoinNasabah;
 use App\Models\SuperAdmin;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -396,7 +397,12 @@ class ManajemenAkunController extends Controller
             $params1['user_id'] = $user->id;
             $params1['kode_pengguna'] = generateRandomCode(12);
             $nasabah = Nasabah::create($params1);
-            if ($nasabah) {
+            $params3 = [
+                'nasabah_id' => $nasabah->id,
+                'total' => 0,
+            ];
+            $poin = PoinNasabah::create($params3);
+            if ($nasabah && $poin) {
                 alert()->success('Success', 'Data Berhasil Disimpan');
             } else {
                 $user->delete();
