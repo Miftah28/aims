@@ -19,4 +19,8 @@ class Nasabah extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+    public function point()
+    {
+        return $this->hasOne('App\Models\PoinNasabah');
+    }
 }

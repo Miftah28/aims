@@ -12,27 +12,28 @@
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-12 mb-3">
-                                <label for="nasabah_id" class="form-label">
+                                <label for="nasabah_id" class="form-label"><span style="color: red;">*</span>
                                     Nasabah</label>
                                 <select class="selectpicker" data-live-search="true" data-width="100%"
-                                    name="nasabah_id">
+                                    name="nasabah_id" required>
                                     <option value="">Pilih Nasabah (jika memiliki akun) </option>
                                     @forelse ($nasabah as $nasabahs)
-                                    <option value="{{ $nasabahs->id }}">{{ $nasabahs->name }}</option>
+                                    <option value="{{ $nasabahs->id }}">{{ $nasabahs->name }}, Kode Pengguna:
+                                        {{$nasabahs->kode_pengguna}}</option>
                                     @empty
                                     <option value="NULL">Nasabah belum diinput</option>
                                     @endforelse
                                 </select>
                             </div>
                             <div class="col-6 mb-3">
-                                <label for="poin_id" class="form-label"><span style="color: red;">*</span>
+                                <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
                                     Jenis Sampah</label>
-                                <select class="selectpicker" data-live-search="true" data-width="100%" name="poin_id"
+                                <select class="selectpicker" data-live-search="true" data-width="100%" name="kategori_sampah_id"
                                     required>
                                     <option value="">Pilih Jenis Sampah </option>
-                                    @forelse ($poin as $poins)
-                                    <option value="{{ $poins->kategoriSampah->id }}">{{
-                                        $poins->kategoriSampah->jenis_sampah }}</option>
+                                    @forelse ($kategorisampah as $kategoriSampahs)
+                                    <option value="{{ $kategoriSampahs->id }}">{{
+                                        $kategoriSampahs->jenis_sampah }}</option>
                                     @empty
                                     <option value="NULL" disabled>Jenis Sampah belum diinput</option>
                                     @endforelse
@@ -42,7 +43,7 @@
                                 <label for="pemasukan_sampah" class="form-label"><span style="color: red;">*</span>
                                     Berat Sampah</label>
                                 <input id="pemasukan_sampah" type="number" class="form-control" name="pemasukan_sampah"
-                                    required>
+                                    step="0.1" required>
                             </div>
                         </div>
                     </div>
@@ -67,38 +68,39 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="POST"
-                    action="{{ route('Admin.pemasukan-sampah.update', Crypt::encrypt($sampahs->id)) }}"
+                <form method="POST" action="{{ route('Admin.pemasukan-sampah.update', Crypt::encrypt($sampahs->id)) }}"
                     enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-12 mb-3">
-                                <label for="nasabah_id" class="form-label">
+                                <label for="nasabah_id" class="form-label"><span style="color: red;">*</span>
                                     Nasabah</label>
                                 <select class="selectpicker" data-live-search="true" data-width="100%"
-                                    name="nasabah_id">
+                                    name="nasabah_id" required>
                                     <option value="">Pilih Nasabah (jika memiliki akun) </option>
                                     @forelse ($nasabah as $nasabahs)
-                                    <option value="{{ $nasabahs->id }}" {{ $sampahs->nasabah_id == $nasabahs->id ? 'selected' : ''
-                                    }}>
-                                    {{ $nasabahs->name }}</option>
+                                    <option value="{{ $nasabahs->id }}" {{ $sampahs->nasabah_id == $nasabahs->id ?
+                                        'selected' : ''
+                                        }}>
+                                        {{ $nasabahs->name }}</option>
                                     @empty
                                     <option value="NULL">Nasabah belum diinput</option>
                                     @endforelse
                                 </select>
                             </div>
                             <div class="col-6 mb-3">
-                                <label for="poin_id" class="form-label"><span style="color: red;">*</span>
+                                <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
                                     Jenis Sampah</label>
-                                <select class="selectpicker" data-live-search="true" data-width="100%" name="poin_id"
+                                <select class="selectpicker" data-live-search="true" data-width="100%" name="kategori_sampah_id"
                                     required>
                                     <option value="">Pilih Jenis Sampah </option>
-                                    @forelse ($poin as $poins)
-                                        <option value="{{ $poins->kategoriSampah->id }}" {{ $sampahs->kategoriSampah->id == $poins->kategoriSampah->id ? 'selected' : ''
+                                    @forelse ($kategorisampah as $kategorisampahs)
+                                    <option value="{{ $kategorisampahs->id }}" {{ $sampahs->kategoriSampah->id ==
+                                        $kategorisampahs->id ? 'selected' : ''
                                         }}>
-                                        {{ $poins->kategoriSampah->jenis_sampah }}</option>
+                                        {{ $kategorisampahs->jenis_sampah }}</option>
                                     @empty
                                     <option value="NULL" disabled>Jenis Sampah belum diinput</option>
                                     @endforelse
@@ -108,7 +110,7 @@
                                 <label for="pemasukan_sampah" class="form-label"><span style="color: red;">*</span>
                                     Berat Sampah</label>
                                 <input id="pemasukan_sampah" type="number" class="form-control" name="pemasukan_sampah"
-                                    value="{{$sampahs->pemasukan_sampah}}">
+                                    value="{{$sampahs->pemasukan_sampah}}" step="0.1">
                             </div>
                         </div>
                         <div class="modal-footer">

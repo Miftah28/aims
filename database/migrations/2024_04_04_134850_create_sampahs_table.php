@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_sampah_id');
             $table->unsignedBigInteger('petugas_id')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
-            $table->unsignedBigInteger('nasabah_id')->nullable();
-            $table->integer('pemasukan_sampah');
+            $table->unsignedBigInteger('nasabah_id');
+            $table->double('pemasukan_sampah');
             $table->string('instansi');
             $table->string('status');
             $table->dateTime('tanggal');

@@ -33,6 +33,7 @@ class PemasukanSampahController extends Controller
     public function store(Request $request)
     {
         $params1 = $request->all();
+        // dd($request->pemasukan_sampah);
         if ($request->input('nasabah_id') == null) {
             $params1['status'] = 'datang langsung';
             $params1['admin_id'] = Auth::user()->admin->id;
@@ -51,16 +52,17 @@ class PemasukanSampahController extends Controller
             $params1['admin_id'] = Auth::user()->admin->id;
             $params1['instansi'] = Auth::user()->admin->instansi;
             $params1['tanggal'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
-            $point = KategoriSampah::where('id', $request->input('poin_id'))->first();
-            $params1['kategori_sampah_id'] = $point->id;
+            $point = KategoriSampah::where('id', $request->kategori_sampah_id)->first();
+            $params1['kategori_sampah_id'] = $request->kategori_sampah_id;
+            // dd($request->pemasukan_sampah * $point->poin_sampah);
             $tambahsampah = Sampah::create($params1);
             $caripoint = PoinNasabah::where('nasabah_id', $request->input('nasabah_id'))->first();
-            $hitungpoin = ($tambahsampah->pemasukan_sampah * $point->poin_sampah) / $point->berat_sampah;
+            $hitungpoin = $tambahsampah->pemasukan_sampah * $point->poin_sampah;
             $totalpoin = $caripoint->total + $hitungpoin;
             $params2 = ['total' => $totalpoin,];
             $caripoint->update($params2);
             $params3 = [
-                'kategori_sampah_id' => $tambahsampah->kategori_sampah_id,
+                // 'kategori_sampah_id' => $tambahsampah->kategori_sampah_id,
                 'sampah_id' => $tambahsampah->id,
                 'admin_id' => Auth::user()->admin->id,
                 'nasabah_id' => $request->input('nasabah_id'),
@@ -95,11 +97,11 @@ class PemasukanSampahController extends Controller
             }
         } else {
             // $params1['tanggal'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
-            $point = KategoriSampah::where('id', $request->input('poin_id'))->first();
+            $point = KategoriSampah::where('id', $request->input('kategori_sampah_id'))->first();
             $params1['kategori_sampah_id'] = $point->id;
             $ubahsampah = $carisampah->update($params1);
             $caripoint = PoinNasabah::where('nasabah_id', $request->input('nasabah_id'))->first();
-            $hitungpoin = ($request->input('pemasukan_sampah') * $point->poin_sampah) / $point->berat_sampah;
+            $hitungpoin = $request->input('pemasukan_sampah') * $point->poin_sampah;
             $caritambahpoin = TukarPoint::where('sampah_id', Crypt::decrypt($id))->first();
             // dd($caritambahpoin->tambah_poin);
             $kurangipoin = $caripoint->total - $caritambahpoin->tambah_poin;

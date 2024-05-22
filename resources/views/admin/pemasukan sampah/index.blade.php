@@ -41,49 +41,37 @@
                             @forelse ($sampah as $sampahs)
                             <tr>
                                 <td scope="row">{{ $loop->iteration }}</td>
-                                @if ($sampahs->status == 'datang langsung')
-                                <td class="text-center">Belum buat akun</td>
-                                <td>
-                                    Jenis Sampah : {{$sampahs->kategoriSampah->jenis_sampah}} <br>
-                                    Berat Sampah : {{$sampahs->pemasukan_sampah}} KG <br>
-                                    Poin : Tidak Dapat Poin <br>
-                                    @php
-                                    $poins = ($sampahs->pemasukan_sampah * $sampahs->kategoriSampah->poin_sampah) / $sampahs->kategoriSampah->berat_sampah;
-                                    $bagipoin = $poins / poinsampah($sampahs->kategoriSampah->id)->jumlah_poin;
-                                    $dapetduit = $bagipoin * poinsampah($sampahs->kategoriSampah->id)->jumlah_saldo;
-                                    @endphp
-                                    Dapat Uang : Rp. {{ number_format($dapetduit, 0, ',', '.') }}
-                                </td>
-                                <td class="text-center">{{$sampahs->instansi}}</td>
-                                <td class="text-center">Datang Ketempat Langsung</td>
-                                <td class="text-center">
-                                    <a href="#edit{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
-                                            class="bi bi-pencil-square"></i></a>
-                                    <a href="#delete{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
-                                            class="bi bi-trash"></i></a>
-                                </td>
-                                @elseif($sampahs->status == 'datang langsung dengan nasabah')
-                                <td class="text-center">{{$sampahs->nasabah->name}}</td>
-                                <td>
-                                    Jenis Sampah : {{$sampahs->kategoriSampah->jenis_sampah}} <br>
-                                    Berat Sampah : {{$sampahs->pemasukan_sampah}} KG <br>
-                                    @php 
-                                    $poins = ($sampahs->pemasukan_sampah * $sampahs->kategoriSampah->poin_sampah) / $sampahs->kategoriSampah->berat_sampah;
-                                    $bagipoin = $poins / poinsampah($sampahs->kategoriSampah->id)->jumlah_poin;
-                                    $dapetduit = $bagipoin * poinsampah($sampahs->kategoriSampah->id)->jumlah_saldo;
-                                    @endphp
-                                    Poin Bertambah : <span style="color: green">+ {{$poins}}</span>  <br>
-                                    Total Poin : {{poinnasabah($sampahs->nasabah_id)->total}} <br>
-                                    {{-- Dapat Uang : Rp. {{ number_format($dapetduit, 0, ',', '.') }} --}}
-                                </td>
-                                <td class="text-center">{{$sampahs->instansi}}</td>
-                                <td class="text-center">Datang Ketempat Langsung</td>
-                                <td class="text-center">
-                                    <a href="#edit{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
-                                            class="bi bi-pencil-square"></i></a>
-                                    <a href="#delete{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
-                                            class="bi bi-trash"></i></a>
-                                </td>
+                                @php
+                                // use Carbon\Carbon;
+                                // $current_time = Carbon::now();
+                                // $sampah_time = Carbon::parse($sampahs->tanggal);
+                                // $diff_in_minutes = $current_time->diffInMinutes($sampah_time);
+                                // Hitung perbedaan waktu dalam detik
+                                    $diffInSeconds = $sampahs->created_at->diffInSeconds(now());
+                                @endphp
+
+                                @if($sampahs->status == 'datang langsung dengan nasabah')
+                                    <td class="text-center">{{$sampahs->nasabah->name}}</td>
+                                    <td>
+                                        Jenis Sampah : {{$sampahs->kategoriSampah->jenis_sampah}} <br>
+                                        Berat Sampah : {{$sampahs->pemasukan_sampah}} KG <br>
+                                        Poin Bertambah : <span style="color: green">+
+                                            {{$sampahs->kategoriSampah->poin_sampah * $sampahs->pemasukan_sampah}}</span>
+                                        <br>
+                                    </td>
+                                    <td class="text-center">{{$sampahs->instansi}}</td>
+                                    <td class="text-center">Datang Ketempat Langsung</td>
+                                    @if ($diffInSeconds < 60)
+                                    <td class="text-center">
+                                        <a href="#edit{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                        <a href="#delete{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                                    </td>
+                                    @else
+                                        <td class="text-center">
+                                            <button disabled class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
+                                            <button disabled class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    @endif
                                 @endif
                             </tr>
                             @empty

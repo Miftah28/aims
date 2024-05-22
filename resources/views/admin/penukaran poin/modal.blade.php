@@ -11,41 +11,39 @@
                     {{ csrf_field() }}
                     <div class="container">
                         <div class="row justify-content-start">
-                            <div class="col-6 mb-3">
-                                <label for="nasabah_id" class="form-label"><span style="color: red;">*</span> Nasabah</label>
-                                <select id="nasabah_id" class="selectpicker" data-live-search="true" data-width="100%" name="nasabah_id" required>
+                            <div class="col-12 mb-3">
+                                <label for="nasabah_id" class="form-label"><span style="color: red;">*</span>
+                                    Nasabah</label>
+                                <select id="nasabah_id" class="selectpicker" data-live-search="true" data-width="100%"
+                                    name="nasabah_id" required>
                                     <option value="">Pilih Nasabah (jika memiliki akun) </option>
                                     @forelse ($nasabah as $nasabahs)
-                                    <option value="{{ $nasabahs->id }}">{{ $nasabahs->name }}</option>
+                                    <option value="{{ $nasabahs->id }}">{{ $nasabahs->name }}, kode
+                                        penguna : {{$nasabahs->kode_pengguna}}, Saldo :{{$nasabahs->point->total}}</option>
                                     @empty
                                     <option value="NULL">Nasabah belum diinput</option>
                                     @endforelse
                                 </select>
                             </div>
-                            <div class="col-6 mb-3">
-                                <label for="total_poin" class="form-label">Saldo Poin</label>
-                                <input id="total_poin" type="number" class="form-control" name="total_poin" value="" disabled>
-                            </div>
-                            <div class="col-6 mb-3">
+                            <div class="col-12 mb-3">
                                 <label for="poin_id" class="form-label"><span style="color: red;">*</span>
-                                    Jenis Sampah</label>
+                                    Poin Yang Akan Ditukar</label>
                                 <select class="selectpicker" data-live-search="true" data-width="100%" name="poin_id"
                                     required>
-                                    <option value="">Pilih Jenis Sampah </option>
+                                    <option value="">Pilih Point </option>
                                     @forelse ($poin as $poins)
-                                    <option value="{{ $poins->kategoriSampah->id }}">{{
-                                        $poins->kategoriSampah->jenis_sampah }}</option>
+                                    <option value="{{ $poins->id }}">Poin : {{
+                                        $poins->jumlah_poin }}, Saldo Didapat {{$poins->jumlah_saldo}}</option>
                                     @empty
-                                    <option value="NULL" disabled>Jenis Sampah belum diinput</option>
+                                    <option value="NULL" disabled>Point belum diinput</option>
                                     @endforelse
                                 </select>
                             </div>
-                            <div class="col-6 mb-3">
+                            {{-- <div class="col-6 mb-3">
                                 <label for="kurang_poin" class="form-label"><span style="color: red;">*</span>
                                     Jumlah Poin yang di tukar</label>
-                                <input id="kurang_poin" type="number" class="form-control" name="kurang_poin"
-                                    required>
-                            </div>
+                                <input id="kurang_poin" type="number" class="form-control" name="kurang_poin" required>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -33,7 +33,7 @@ class ManajemenAkunController extends Controller
             'username' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
         ]);
-
+        // dd($request->file('image'));
         $params1 = $request->all();
         $params2 = [
             'username' => $request->username,

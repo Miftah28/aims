@@ -12,7 +12,7 @@
                     {{ csrf_field() }}
                     <div class="container">
                         <div class="row justify-content-start">
-                            <div class="col-12 mb-3">
+                            {{-- <div class="col-12 mb-3">
                                 <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
                                     Jenis Sampah</label>
                                 <select class="selectpicker" data-live-search="true" data-width="100%"
@@ -24,7 +24,7 @@
                                     <option value="NULL">Jenis Sampah belum diinput</option>
                                     @endforelse
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-6 mb-3">
                                 <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span>
                                     Jumlah Poin</label>
@@ -65,7 +65,7 @@
                     {{ method_field('PUT') }}
                     <div class="container">
                         <div class="row justify-content-start">
-                            <div class="col-12 mb-3">
+                            {{-- <div class="col-12 mb-3">
                                 <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
                                     Jenis Sampah</label>
                                 <select class="selectpicker" data-live-search="true" data-width="100%" name="kategori_sampah_id"
@@ -80,7 +80,7 @@
                                     <option value="NULL">Jenis Sampah belum diinput</option>
                                     @endforelse
                                 </select>
-                            </div>
+                            </div> --}}
                             <div class="col-6 mb-3">
                                 <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span>
                                     Jumlah Poin</label>

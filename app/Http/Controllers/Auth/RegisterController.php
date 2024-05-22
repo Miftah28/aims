@@ -19,12 +19,6 @@ class RegisterController extends Controller
     }
     public function create(Request $request)
     {
-        // return User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password']),
-        // ]);
-        // dd('woy');
         $request->validate([
             'name' => ['required', 'string', 'max:50'],
             'username' => ['required', 'string', 'email', 'max:100', 'unique:users'],
@@ -34,8 +28,6 @@ class RegisterController extends Controller
                 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%@]).*$/',
                 'confirmed'
             ]
-            // 'username' => 'required|string|max:255',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
         ]);
 
         $params1 = $request->all();
@@ -45,9 +37,6 @@ class RegisterController extends Controller
             'role' => 'admin',
             'status' => 'prosess',
         ];
-        // if ($request->has('image')) {
-        //     $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
-        // }
 
         $user = User::create($params2);
         if ($user) {

@@ -31,7 +31,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th class="text-center" scope="col">Jenis Sampah</th>
+                                {{-- <th class="text-center" scope="col">Jenis Sampah</th> --}}
                                 <th class="text-center" scope="col">Jumlah Poin Yang Ditukar</th>
                                 <th class="text-center" scope="col">Jumlah Uang Yang Di Dapat </th>
                                 <th class="text-center" scope="col">Aksi</th>
@@ -41,8 +41,8 @@
                             @forelse ($poin as $poins)
                             <tr>
                                 <td scope="row">{{ $loop->iteration }}</td>
-                                <td>{{$poins->kategoriSampah->jenis_sampah}}</td>
-                                <td>{{$poins->jumlah_poin}}</td>
+                                {{-- <td>{{$poins->kategoriSampah->jenis_sampah}}</td> --}}
+                                <td class="text-center">{{$poins->jumlah_poin}}</td>
                                 <td class="text-center">Rp. {{ number_format($poins->jumlah_saldo, 0, ',', '.') }}</td>
                                 <td class="text-center">
                                     <a href="#edit{{ $poins->id }}" data-bs-toggle="modal" class="btn btn-warning"><i

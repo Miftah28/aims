@@ -99,7 +99,7 @@
                 <li>
                     <a class="{{ request()->is('admin/master/pemasukan-pengeluaran-poin') ? 'active' : 'collapsed' }}"
                         href="{{ route('Admin.master.pemasukan-pengeluaran-poin.index') }}">
-                        <i class="bi bi-circle"></i><span>Monitoring Pemasukan & Pengeluaran Poin</span>
+                        <i class="bi bi-circle"></i><span>Monitoring Pengeluaran Poin</span>
                     </a>
                 </li>
             </ul>
@@ -158,7 +158,7 @@
                 <li>
                     <a class="{{ request()->is('admin/laporan/pemasukan-pengeluaran-poin') ? 'active' : 'collapsed' }}"
                         href="{{ route('Admin.laporan.pemasukan-pengeluaran-poin.index') }}">
-                        <i class="bi bi-circle"></i><span>Laporan Pemasukan & Pengeluaran Poin</span>
+                        <i class="bi bi-circle"></i><span>Laporan Pengeluaran Poin</span>
                     </a>
                 </li>
                 <li>

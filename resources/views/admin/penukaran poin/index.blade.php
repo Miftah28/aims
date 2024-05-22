@@ -35,33 +35,28 @@
                                 <th class="text-center" scope="col">Instansi</th>
                                 <th class="text-center" scope="col">Tempat Tukar</th>
                                 <th class="text-center" scope="col">status</th>
-                                <th class="text-center" scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($penukaran as $penukarans)
                             <tr>
-                                <td class="text-center">{{$penukarans->nasabah->name}}</td>
+                                <td scope="row">{{ $loop->iteration }}</td>
+                                <td>Nama Nasabah : {{$penukarans->nasabah->name}} <br> Kode Pengguna : {{$penukarans->nasabah->kode_pengguna}}</td>
                                 <td>
-                                    Jenis Sampah : {{$penukarans->kategoriSampah->jenis_sampah}} <br>
-                                    Berat Sampah : {{$penukarans->pemasukan_sampah}} KG <br>
-                                    @php 
-                                    $poins = ($penukarans->pemasukan_sampah * $penukarans->kategoriSampah->poin_sampah) / $penukarans->kategoriSampah->berat_sampah;
-                                    $bagipoin = $poins / poinsampah($penukarans->kategoriSampah->id)->jumlah_poin;
+                                    {{-- Jenis Sampah : {{$penukarans->kategoriSampah->jenis_sampah}} <br> --}}
+                                    {{-- @php 
+                                    // $poins = ($penukarans->pemasukan_sampah * $penukarans->kategoriSampah->poin_sampah) / $penukarans->kategoriSampah->berat_sampah;
+                                    $bagipoin = $penukarans->kurang_poin / poinsampah($penukarans->kategoriSampah->id)->jumlah_poin;
                                     $dapetduit = $bagipoin * poinsampah($penukarans->kategoriSampah->id)->jumlah_saldo;
-                                    @endphp
-                                    Poin Bertambah : <span style="color: green">+ {{$poins}}</span>  <br>
-                                    Total Poin : {{poinnasabah($penukarans->nasabah_id)->total}} <br>
-                                    {{-- Dapat Uang : Rp. {{ number_format($dapetduit, 0, ',', '.') }} --}}
+                                    // $sisasaldo =  poinsampah($penukarans->kategoriSampah->id)->total - $penukarans->kurang_poin;
+                                    @endphp --}}
+                                    Poin Berkurang : <span style="color: red">- {{$penukarans->kurang_poin}}</span>  <br>
+                                    {{-- Sisa Poin : {{$sisasaldo}} <br> --}}
+                                    Dapat Uang : Rp. {{ number_format( caripoin($penukarans->point_id)->jumlah_saldo, 0, ',', '.') }}
                                 </td>
-                                <td class="text-center">{{$penukarans->instansi}}</td>
+                                <td class="text-center">{{$penukarans->admin->instansi}}</td>
                                 <td class="text-center">Datang Ketempat Langsung</td>
-                                <td class="text-center">
-                                    <a href="#edit{{ $penukarans->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
-                                            class="bi bi-pencil-square"></i></a>
-                                    <a href="#delete{{ $penukarans->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
-                                            class="bi bi-trash"></i></a>
-                                </td>
+                                <td>{{$penukarans->status}}</td>
                             </tr>
                             @empty
                             <tr>
@@ -79,34 +74,5 @@
 
 @include('admin.penukaran poin.modal')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var nasabahSelect = document.getElementById('nasabah_id');
-        var totalPoinInput = document.getElementById('total_poin');
-
-        nasabahSelect.addEventListener('change', function () {
-            var nasabahId = nasabahSelect.value;
-            if (nasabahId) {
-                // Call the carinasabah function and update the total_poin input
-                fetch(`/carinasabah/${nasabahId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            totalPoinInput.value = data.total;
-                        } else {
-                            totalPoinInput.value = 0;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching nasabah data:', error);
-                        totalPoinInput.value = 0;
-                    });
-            } else {
-                totalPoinInput.value = 0;
-            }
-        });
-    });
-</script>
-
 
 @endsection

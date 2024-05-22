@@ -90,6 +90,14 @@ if (!function_exists('carinasabah')) {
         return $results;
     }
 }
+if (!function_exists('caripoin')) {
+    function caripoin($pointId)
+    {
+        $results = Point::where('id', $pointId)->first();
+
+        return $results;
+    }
+}
 if (!function_exists('generateRandomCode')) {
     function generateRandomCode($length)
     {

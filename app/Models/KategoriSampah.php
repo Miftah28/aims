@@ -13,6 +13,7 @@ class KategoriSampah extends Model
         'jenis_sampah',
         'poin_sampah',
         'berat_sampah',
+        // 'harga_perkilogram',
     ];
     public function admin()
     {

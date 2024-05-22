@@ -16,7 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->string('jenis_sampah');
             $table->integer('poin_sampah');
-            $table->integer('berat_sampah');
+            $table->double('berat_sampah');
+            // $table->integer('harga_perkilogram');
             $table->timestamps();
             $table->softDeletes();
 
