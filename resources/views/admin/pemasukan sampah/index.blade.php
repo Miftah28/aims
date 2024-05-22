@@ -61,7 +61,7 @@
                                     </td>
                                     <td class="text-center">{{$sampahs->instansi}}</td>
                                     <td class="text-center">Datang Ketempat Langsung</td>
-                                    @if ($diffInSeconds < 60)
+                                    @if ($diffInSeconds < 300)
                                     <td class="text-center">
                                         <a href="#edit{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                         <a href="#delete{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-danger"><i class="bi bi-trash"></i></a>

@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         $user = User::create([
-            'username' => 'petugas1@gmail.com',
+            'username' => ' ',
             'status' => 'aktif',
             'password' => bcrypt('123456789'),
             'role' => 'petugas',

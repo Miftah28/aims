@@ -28,15 +28,6 @@ class PenukaranPoinController extends Controller
         ];
         return view('admin.penukaran poin.index', $data);
     }
-    public function getTotalPoin($id)
-    {
-        $nasabah = PoinNasabah::where('nasabah_id', $id);
-        if ($nasabah) {
-            return response()->json(['total' => $nasabah->total]);
-        } else {
-            return response()->json(['total' => 0], 404);
-        }
-    }
     public function tukar(Request $request)
     {
         $params1 = $request->all();
@@ -60,7 +51,7 @@ class PenukaranPoinController extends Controller
             $hitungpoin = $caripoint->total - $tukarpoin->kurang_poin;
             $params2 = ['total' => $hitungpoin,];
             $caripoint->update($params2);
-            if ($tukarpoin && $caripoint && $caripoint) {
+            if ($tukarpoin && $caripoint) {
                 alert()->success('Success', 'Data Berhasil Disimpan');
             } else {
                 alert()->error('Error', 'Data Gagal Disimpan');
