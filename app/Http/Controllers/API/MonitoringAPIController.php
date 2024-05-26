@@ -38,6 +38,20 @@ class MonitoringAPIController extends Controller
     public function pemasukansampah()
     {
         $nasabahId = Auth::user()->nasabah->id;
+        $totalPemasukanSampah = Sampah::where('nasabah_id', $nasabahId)->count();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'tukar' => $totalPemasukanSampah,
+            ],
+            'message' => 'Sukses menampilkan data'
+        ]);
+    }
+
+    public function kontribusisampah()
+    {
+        $nasabahId = Auth::user()->nasabah->id;
         $totalPemasukanSampah = Sampah::where('nasabah_id', $nasabahId)->sum('pemasukan_sampah');
 
         return response()->json([

@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum', 'user-access:petugas'])->group(function () {
 Route::middleware(['auth:sanctum', 'user-access:nasabah'])->group(function () {
     Route::get('/lihat-poin', [MonitoringAPIController::class, 'lihatpoin']);
     Route::get('/lihat-riwayat-tukar-poin', [MonitoringAPIController::class, 'lihatriwayattukarpoin']);
+    Route::get('/kontribusi-sampah', [MonitoringAPIController::class, 'kontribusisampah']);
     Route::get('/pemasukan-sampah', [MonitoringAPIController::class, 'pemasukansampah']);
-    // Route::post('/tukar-poin', [PemasukanPengeluaranAPIController::class, 'tukarpoin']);
     Route::get('/profile', [ProfileAPIController::class, 'profilenasabah']);
 });
