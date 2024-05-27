@@ -3,15 +3,15 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">NiceAdmin</span>
+            <img src="{{asset('assets/admin/img/waste-management.jpg')}}" alt="">
+            <span class="d-none d-lg-block" style="color: #fff">CleanEarth</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-            @if ( Auth::user()->role === 'superadmin')
+            {{-- @if ( Auth::user()->role === 'superadmin')
             <li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -71,7 +71,7 @@
                 </ul><!-- End Notification Dropdown Items -->
 
             </li><!-- End Notification Nav -->
-            @endif
+            @endif --}}
 
             {{-- <li class="nav-item dropdown">
 

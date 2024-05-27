@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin\Manajemen;
 
 use App\Http\Controllers\Controller;
+use App\Mail\JadwalPejemputanMail;
 use App\Models\JadwalTugas;
+use App\Models\Nasabah;
 use App\Models\Petugas;
 use App\Models\PetugasJemput;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 class TugasPetugasController extends Controller
 {
@@ -36,9 +40,16 @@ class TugasPetugasController extends Controller
                         'petugas_id' => $tugasId,
                         // 'email' => $perusahaan->email_perusahaan,
                     ]);
-                    // $this->sendNotificationEmail($pengumumanPerusahaan);
+                    $lokasijemput = JadwalTugas::where('id', $petugasjemput->jadwal_tugas_id)->first();
+                    // $koordinatjemput = $petugasjemput->jadwalTugas->lokasi->koordinat;
+                    Mail::to($jadwaltugas->user->username)->send(new JadwalPejemputanMail($lokasijemput));
                 }
             }
+            $nasabah = User::where('role', 'nasabah')->where('status', 'aktif')->get();
+            foreach ($nasabah as $nasabahs) {
+                Mail::to($nasabahs->username)->send(new JadwalPejemputanMail($lokasijemput));
+            }
+            // dd($petugasjemput->jadwalTugas->lokasi->tempat);
             if ($petugasjemput) {
                 alert()->success('Success', 'Data Berhasil Disimpan');
                 return redirect()->route('Admin.manajemen-sampah.kelola-tugas.index');
@@ -93,6 +104,12 @@ class TugasPetugasController extends Controller
 
             // Menyimpan entri baru ke database
             PetugasJemput::create($params1);
+            $lokasijemput = JadwalTugas::where('id', Crypt::decrypt($id))->first();
+            $petugas = PetugasJemput::where('jadwal_tugas_id', Crypt::decrypt($id))->get();
+            // dd($petugass);
+            foreach ($petugas as $petugass) {
+                Mail::to($petugass->petugas->user->username)->send(new JadwalPejemputanMail($lokasijemput));
+            }
         }
 
         // Cek apakah data berhasil disimpan atau tidak

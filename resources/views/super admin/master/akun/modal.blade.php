@@ -16,6 +16,7 @@
                                     Username/email</label>
                                 <input id="username" type="text" class="form-control" name="username"
                                     value="{{ old('username') }}" placeholder="email untuk akun admin" required>
+                                    <span style="color: red"><h6>Note: Email untuk akun admin, username untuk super admin</h6></span>
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="name" class="form-label"><span style="color: red;">*</span>

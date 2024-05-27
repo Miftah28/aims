@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.landing page.index');
 });
 
 Auth::routes();
@@ -54,9 +54,9 @@ Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
     Route::delete('superadmin/master/akun-nasabah/{id}', [ManajemenAkunController::class, 'destroynasabah'])->name('SuperAdmin.master.akun-nasabah.destroy-nasabah');
 
     // Konfirmasi akun
-    Route::get('superadmin/konfirmasi-akun', [ManajemenAkunController::class, 'konfirmasiindex'])->name('SuperAdmin.konfirmasi-akun.index');
-    Route::put('superadmin/konfirmasi-akun/konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasi'])->name('SuperAdmin.konfirmasi-akun.konfirmasi');
-    Route::put('superadmin/konfirmasi-akun/tolak-konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasitolak'])->name('SuperAdmin.konfirmasi-akun.tolak-konfirmasi');
+    // Route::get('superadmin/konfirmasi-akun', [ManajemenAkunController::class, 'konfirmasiindex'])->name('SuperAdmin.konfirmasi-akun.index');
+    // Route::put('superadmin/konfirmasi-akun/konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasi'])->name('SuperAdmin.konfirmasi-akun.konfirmasi');
+    // Route::put('superadmin/konfirmasi-akun/tolak-konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasitolak'])->name('SuperAdmin.konfirmasi-akun.tolak-konfirmasi');
 
     // profile
     Route::get('superadmin/profile', [superadminprofileController::class, 'index'])->name('SuperAdmin.profile.index');
@@ -87,21 +87,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     //  verifikasi status akun petugas
     Route::get('admin/master/akun-petugas/verifikasistatus/{id}', [ManajemenPetugasController::class, 'verifikasistatus'])->name('Admin.master.akun-petugas.verifikasistatus');
     Route::get('admin/master/akun-petugas/unverifikasistatus/{id}', [ManajemenPetugasController::class, 'unverifikasistatus'])->name('Admin.master.akun-petugas.unverifikasistatus');
-    //  monitoring data sampah petugas
-    Route::get('admin/master/monitoring-sampah-petugas', [MonitoringDataController::class, 'index'])->name('Admin.master.monitoring-sampah-petugas.index');
-    Route::post('admin/master/monitoring-sampah-petugas', [MonitoringDataController::class, 'store'])->name('Admin.master.monitoring-sampah-petugas.store');
-    Route::put('admin/master/monitoring-sampah-petugas/{id}', [MonitoringDataController::class, 'update'])->name('Admin.master.monitoring-sampah-petugas.update');
-    Route::delete('admin/master/monitoring-sampah-petugas/{id}', [MonitoringDataController::class, 'destroy'])->name('Admin.master.monitoring-sampah-petugas.destroy');
     //  monitoring pemasukan sampah
-    Route::get('admin/master/pemasukan-sampah', [MonitoringDataController::class, 'index'])->name('Admin.master.pemasukan-sampah.index');
-    Route::post('admin/master/pemasukan-sampah', [MonitoringDataController::class, 'store'])->name('Admin.master.pemasukan-sampah.store');
-    Route::put('admin/master/pemasukan-sampah/{id}', [MonitoringDataController::class, 'update'])->name('Admin.master.pemasukan-sampah.update');
-    Route::delete('admin/master/pemasukan-sampah/{id}', [MonitoringDataController::class, 'destroy'])->name('Admin.master.pemasukan-sampah.destroy');
-    //  monitoring pemasukan dan pengeluaran sampah
-    Route::get('admin/master/pemasukan-pengeluaran-poin', [MonitoringDataController::class, 'index'])->name('Admin.master.pemasukan-pengeluaran-poin.index');
-    Route::post('admin/master/pemasukan-pengeluaran-poin', [MonitoringDataController::class, 'store'])->name('Admin.master.pemasukan-pengeluaran-poin.store');
-    Route::put('admin/master/pemasukan-pengeluaran-poin/{id}', [MonitoringDataController::class, 'update'])->name('Admin.master.pemasukan-pengeluaran-poin.update');
-    Route::delete('admin/master/pemasukan-pengeluaran-poin/{id}', [MonitoringDataController::class, 'destroy'])->name('Admin.master.pemasukan-pengeluaran-poin.destroy');
+    Route::get('admin/master/pemasukan-sampah', [MonitoringDataController::class, 'monitoringpemasukansampah'])->name('Admin.master.pemasukan-sampah.index');
+    //  monitoring pengeluaran poin
+    Route::get('admin/master/pemasukan-pengeluaran-poin', [MonitoringDataController::class, 'monitoringpengeluaranpoin'])->name('Admin.master.pemasukan-pengeluaran-poin.index');
 
     // Manajemen sampah
     //  kelola poin

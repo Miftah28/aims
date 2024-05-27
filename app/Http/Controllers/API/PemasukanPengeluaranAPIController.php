@@ -48,6 +48,7 @@ class PemasukanPengeluaranAPIController extends Controller
         $jadwaltugas = JadwalTugas::where('id', $id)->first();
         $params1['status'] = 'datang ke lokasi yang di tentukan';
         $params1['petugas_id'] = Auth::user()->petugas->id;
+        $params1['admin_id'] = Auth::user()->petugas->admin->id;
         $params1['lokasi_id'] = $jadwaltugas->lokasi->id;
         $params1['instansi'] = Auth::user()->petugas->admin->instansi;
         $params1['tanggal'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
@@ -65,6 +66,7 @@ class PemasukanPengeluaranAPIController extends Controller
             'sampah_id' => $tambahsampah->id,
             'lokasi_id' => $tambahsampah->lokasi->id,
             'petugas_id' => Auth::user()->petugas->id,
+            'admin_id' => Auth::user()->petugas->admin->id,
             'nasabah_id' => $request->input('nasabah_id'),
             'tanggal' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             'status' => 'penambahan poin',
@@ -107,6 +109,7 @@ class PemasukanPengeluaranAPIController extends Controller
             $params1['status'] = 'tukar poin';
             $params1['tanggal'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
             $params1['petugas_id'] = Auth::user()->petugas->id;
+            $params1['admin_id'] = Auth::user()->petugas->admin->id;
             $params1['instansi'] = Auth::user()->petugas->admin->instansi;
             $params1['point_id'] = $request->poin_id;
             $params1['kurang_poin'] = $lihatpoin->jumlah_poin;

@@ -14,7 +14,7 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->is('superadmin/master/*') ? '' : 'collapsed' }}"
                 data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-card-list"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav"
                 class="nav-content {{ request()->is('superadmin/master/*') ? '' : 'collapse' }} "
@@ -34,17 +34,17 @@
             </ul>
         </li><!-- End Master -->
 
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link {{ request()->is('superadmin/konfirmasi-akun') ? 'active' : 'collapsed' }}"
                 href="{{route('SuperAdmin.konfirmasi-akun.index')}}">
                 <i class="bi bi-newspaper"></i><span>Konfrimasi Akun</span>
             </a>
-        </li><!-- End konfirmasi Akun -->
+        </li><!-- End konfirmasi Akun --> --}}
 
         <li class="nav-item">
             <a class="nav-link {{ request()->is('superadmin/profile') ? 'active' : 'collapsed' }}"
                 href="{{route('SuperAdmin.profile.index')}}">
-                <i class="bi bi-newspaper"></i><span>Profile</span>
+                <i class="bi bi-person-circle"></i><span>Profile</span>
             </a>
         </li><!-- End Profile -->
 
@@ -85,17 +85,17 @@
                     </a>
                 </li>
                 <li>
-                    <a class="{{ request()->is('admin/master/monitoring-sampah-petugas') ? 'active' : 'collapsed' }}"
-                        href="{{ route('Admin.master.monitoring-sampah-petugas.index') }}">
-                        <i class="bi bi-circle"></i><span>Monitoring Sampah Petugas</span>
-                    </a>
-                </li>
-                <li>
                     <a class="{{ request()->is('admin/master/pemasukan-sampah') ? 'active' : 'collapsed' }}"
                         href="{{ route('Admin.master.pemasukan-sampah.index') }}">
                         <i class="bi bi-circle"></i><span>Monitoring Pemasukan Sampah</span>
                     </a>
                 </li>
+                {{-- <li>
+                    <a class="{{ request()->is('admin/master/pemasukan-sampah') ? 'active' : 'collapsed' }}"
+                        href="{{ route('Admin.master.pemasukan-sampah.index') }}">
+                        <i class="bi bi-circle"></i><span>Monitoring Pemasukan Sampah</span>
+                    </a>
+                </li> --}}
                 <li>
                     <a class="{{ request()->is('admin/master/pemasukan-pengeluaran-poin') ? 'active' : 'collapsed' }}"
                         href="{{ route('Admin.master.pemasukan-pengeluaran-poin.index') }}">

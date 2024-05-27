@@ -31,7 +31,7 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th class="text-center" scope="col">Nasabah</th>
-                                <th class="text-center" scope="col">Kategori Sampah</th>
+                                <th class="text-center" scope="col">Tukar Poin</th>
                                 <th class="text-center" scope="col">Instansi</th>
                                 <th class="text-center" scope="col">Tempat Tukar</th>
                                 <th class="text-center" scope="col">status</th>

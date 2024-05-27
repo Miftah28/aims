@@ -110,3 +110,55 @@ if (!function_exists('generateRandomCode')) {
         return $randomString;
     }
 }
+
+if (!function_exists('countadmin')) {
+    function countadmin()
+    {
+        $results = User::where('role', 'admin')->where('status', 'aktif')->count();
+        return $results;
+    }
+}
+
+if (!function_exists('countadminpersen')) {
+    function countadminpersen()
+    {
+        $totalaktif = User::where('role', 'admin')->where('status', 'aktif')->count();
+        $total = User::where('role', 'admin')->count();
+        $results = ($totalaktif / $total) * 100;
+        return $results;
+    }
+}
+if (!function_exists('countpetugas')) {
+    function countpetugas()
+    {
+        $results = User::where('role', 'petugas')->where('status', 'aktif')->count();
+        return $results;
+    }
+}
+
+if (!function_exists('countpetugaspersen')) {
+    function countpetugaspersen()
+    {
+        $totalaktif = User::where('role', 'petugas')->where('status', 'aktif')->count();
+        $total = User::where('role', 'petugas')->count();
+        $results = ($totalaktif / $total) * 100;
+        return $results;
+    }
+}
+if (!function_exists('countnasabah')) {
+    function countnasabah()
+    {
+        $results = User::where('role', 'nasabah')->where('status', 'aktif')->count();
+        return $results;
+    }
+}
+
+if (!function_exists('countnasabahpersen')) {
+    function countnasabahpersen()
+    {
+        $totalaktif = User::where('role', 'nasabah')->where('status', 'aktif')->count();
+        $total = User::where('role', 'nasabah')->count();
+        $results = ($totalaktif / $total) * 100;
+        return $results;
+    }
+}

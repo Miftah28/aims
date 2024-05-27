@@ -30,12 +30,12 @@ Route::middleware(['auth:sanctum', 'user-access:petugas'])->group(function () {
     Route::get('/lihat-riwayat-tukar-poin', [PemasukanPengeluaranAPIController::class, 'lihatriwayattukarpoin']);
     Route::post('/pemasukan-sampah/{id}', [PemasukanPengeluaranAPIController::class, 'pemasukansampah']);
     Route::post('/tukar-poin', [PemasukanPengeluaranAPIController::class, 'tukarpoin']);
-    Route::get('/profile', [ProfileAPIController::class, 'profilepetugas']);
+    Route::get('/profile-petugas', [ProfileAPIController::class, 'profilepetugas']);
 });
 Route::middleware(['auth:sanctum', 'user-access:nasabah'])->group(function () {
     Route::get('/lihat-poin', [MonitoringAPIController::class, 'lihatpoin']);
     Route::get('/lihat-riwayat-tukar-poin', [MonitoringAPIController::class, 'lihatriwayattukarpoin']);
     Route::get('/kontribusi-sampah', [MonitoringAPIController::class, 'kontribusisampah']);
     Route::get('/pemasukan-sampah', [MonitoringAPIController::class, 'pemasukansampah']);
-    Route::get('/profile', [ProfileAPIController::class, 'profilenasabah']);
+    Route::get('/profile-nasabah', [ProfileAPIController::class, 'profilenasabah']);
 });

@@ -34,37 +34,44 @@ class ManajemenAkunController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
         ]);
         // dd($request->file('image'));
-        $params1 = $request->all();
-        $params2 = [
-            'username' => $request->username,
-            'password' => Hash::make('123456789'),
-            'role' => $request->role,
-            'status' => $request->status,
-        ];
+        $existingUser = User::where('username', $request->username)->first();
 
-        if ($request->has('image')) {
-            $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
-        }
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
+        } else {
+            $params1 = $request->all();
+            $params2 = [
+                'username' => $request->username,
+                'password' => Hash::make('123456789'),
+                'role' => $request->role,
+                'status' => $request->status,
+            ];
 
-        $user = User::create($params2);
-        if ($user) {
-            if ($params2['role'] == 'superadmin') {
-                $params1['user_id'] = $user->id;
-                $superadmin = SuperAdmin::create($params1);
-                if ($superadmin) {
-                    alert()->success('Success', 'Data Berhasil Disimpan');
-                } else {
-                    $user->delete();
-                    alert()->error('Error', 'Data Gagal Disimpan');
-                }
-            } else if ($params2['role'] == 'admin') {
-                $params1['user_id'] = $user->id;
-                $admin = Admin::create($params1);
-                if ($admin) {
-                    alert()->success('Success', 'Data Berhasil Disimpan');
-                } else {
-                    $user->delete();
-                    alert()->error('Error', 'Data Gagal Disimpan');
+            if ($request->has('image')) {
+                $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
+            }
+
+            $user = User::create($params2);
+            if ($user) {
+                if ($params2['role'] == 'superadmin') {
+                    $params1['user_id'] = $user->id;
+                    $superadmin = SuperAdmin::create($params1);
+                    if ($superadmin) {
+                        alert()->success('Success', 'Data Berhasil Disimpan');
+                    } else {
+                        $user->delete();
+                        alert()->error('Error', 'Data Gagal Disimpan');
+                    }
+                } else if ($params2['role'] == 'admin') {
+                    $params1['user_id'] = $user->id;
+                    $admin = Admin::create($params1);
+                    if ($admin) {
+                        alert()->success('Success', 'Data Berhasil Disimpan');
+                    } else {
+                        $user->delete();
+                        alert()->error('Error', 'Data Gagal Disimpan');
+                    }
                 }
             }
         }
@@ -88,46 +95,52 @@ class ManajemenAkunController extends Controller
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        $params1 = $request->all();
-        $params2['username'] = $request->username;
-        // Pengecekan jika password konfirmasi tidak sama dengan password
-
-        if ($request->filled('password')) {
-            $params2['password'] = Hash::make($request->password);
+        $existingUser = User::where('username', $request->username)->first();
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
         } else {
-            $params2 = $request->except('password');
-        }
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            if ($file->isValid()) {
-                $params1['image'] = $this->simpanImage($params2['role'], $file, $params2['username']);
+            $params1 = $request->all();
+            $params2['username'] = $request->username;
+            // Pengecekan jika password konfirmasi tidak sama dengan password
+
+            if ($request->filled('password')) {
+                $params2['password'] = Hash::make($request->password);
             } else {
-                return redirect()->back()->with('error', 'File foto tidak valid');
-            }
-        } else {
-            $params1 = $request->except('image');
-        }
-        if ($params1['role'] == 'admin') {
-            $admin = Admin::where('user_id', Crypt::decrypt($id))->first();
-            $petugas = Admin::findOrFail($admin->id);
-            $user = User::findOrFail($petugas->user_id);
-            if ($petugas->update($params1) && $user->update($params2)) {
-                alert()->success('Success', 'Data Berhasil Disimpan');
-            } else {
-                alert()->error('Error', 'Data Gagal Disimpan');
+                $params2 = $request->except('password');
             }
 
-            return redirect()->route('SuperAdmin.master.akun.index')->with('success', 'Data berhasil diperbarui');
-        } else if ($params1['role'] == 'superadmin') {
-            $superadmin = SuperAdmin::where('user_id', Crypt::decrypt($id))->first();
-            $petugas = SuperAdmin::findOrFail($superadmin->id);
-            $user = User::findOrFail($petugas->user_id);
-            if ($petugas->update($params1) && $user->update($params2)) {
-                alert()->success('Success', 'Data Berhasil Disimpan');
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                if ($file->isValid()) {
+                    $params1['image'] = $this->simpanImage($params2['role'], $file, $params2['username']);
+                } else {
+                    return redirect()->back()->with('error', 'File foto tidak valid');
+                }
             } else {
-                alert()->error('Error', 'Data Gagal Disimpan');
+                $params1 = $request->except('image');
+            }
+            if ($params1['role'] == 'admin') {
+                $admin = Admin::where('user_id', Crypt::decrypt($id))->first();
+                $petugas = Admin::findOrFail($admin->id);
+                $user = User::findOrFail($petugas->user_id);
+                if ($petugas->update($params1) && $user->update($params2)) {
+                    alert()->success('Success', 'Data Berhasil Disimpan');
+                } else {
+                    alert()->error('Error', 'Data Gagal Disimpan');
+                }
+
+                return redirect()->route('SuperAdmin.master.akun.index')->with('success', 'Data berhasil diperbarui');
+            } else if ($params1['role'] == 'superadmin') {
+                $superadmin = SuperAdmin::where('user_id', Crypt::decrypt($id))->first();
+                $petugas = SuperAdmin::findOrFail($superadmin->id);
+                $user = User::findOrFail($petugas->user_id);
+                if ($petugas->update($params1) && $user->update($params2)) {
+                    alert()->success('Success', 'Data Berhasil Disimpan');
+                } else {
+                    alert()->error('Error', 'Data Gagal Disimpan');
+                }
             }
 
             return redirect()->route('SuperAdmin.master.akun.index')->with('success', 'Data berhasil diperbarui');
@@ -194,29 +207,35 @@ class ManajemenAkunController extends Controller
             // 'username' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
         ]);
+        $existingUser = User::where('username', $request->username)->first();
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
+        } else {
 
-        $params1 = $request->all();
-        $params2 = [
-            'username' => $request->username,
-            'password' => Hash::make('123456789'),
-            'role' => 'petugas',
-            'status' => 'aktif',
-        ];
-        if ($request->has('image')) {
-            $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
-        }
+            $params1 = $request->all();
+            $params2 = [
+                'username' => $request->username,
+                'password' => Hash::make('123456789'),
+                'role' => 'petugas',
+                'status' => 'aktif',
+            ];
+            if ($request->has('image')) {
+                $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
+            }
 
-        $user = User::create($params2);
-        if ($user) {
-            $params1['user_id'] = $user->id;
-            $admin = Admin::where('user_id', Crypt::decrypt($id))->first();
-            $params1['admin_id'] = $admin->id;
-            $admin = Petugas::create($params1);
-            if ($admin) {
-                alert()->success('Success', 'Data Berhasil Disimpan');
-            } else {
-                $user->delete();
-                alert()->error('Error', 'Data Gagal Disimpan');
+            $user = User::create($params2);
+            if ($user) {
+                $params1['user_id'] = $user->id;
+                $admin = Admin::where('user_id', Crypt::decrypt($id))->first();
+                $params1['admin_id'] = $admin->id;
+                $admin = Petugas::create($params1);
+                if ($admin) {
+                    alert()->success('Success', 'Data Berhasil Disimpan');
+                } else {
+                    $user->delete();
+                    alert()->error('Error', 'Data Gagal Disimpan');
+                }
             }
         }
         return redirect()->route('SuperAdmin.master.akun.index');
@@ -239,34 +258,40 @@ class ManajemenAkunController extends Controller
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        $existingUser = User::where('username', $request->username)->first();
 
-        $params1 = $request->all();
-        $params2['username'] = $request->username;
-        // Pengecekan jika password konfirmasi tidak sama dengan password
-
-        if ($request->filled('password')) {
-            $params2['password'] = Hash::make($request->password);
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
         } else {
-            $params2 = $request->except('password');
-        }
+            $params1 = $request->all();
+            $params2['username'] = $request->username;
+            // Pengecekan jika password konfirmasi tidak sama dengan password
 
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            if ($file->isValid()) {
-                $params1['image'] = $this->simpanImage($params2['role'], $file, $params1['name']);
+            if ($request->filled('password')) {
+                $params2['password'] = Hash::make($request->password);
             } else {
-                return redirect()->back()->with('error', 'File foto tidak valid');
+                $params2 = $request->except('password');
             }
-        } else {
-            $params1 = $request->except('image');
-        }
-        // $cari = Petugas::where('user_id', Crypt::decrypt($id))->first();
-        $petugas = Petugas::findOrFail(Crypt::decrypt($id));
-        $user = User::findOrFail($petugas->user_id);
-        if ($petugas->update($params1) && $user->update($params2)) {
-            alert()->success('Success', 'Data Berhasil Disimpan');
-        } else {
-            alert()->error('Error', 'Data Gagal Disimpan');
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                if ($file->isValid()) {
+                    $params1['image'] = $this->simpanImage($params2['role'], $file, $params1['name']);
+                } else {
+                    return redirect()->back()->with('error', 'File foto tidak valid');
+                }
+            } else {
+                $params1 = $request->except('image');
+            }
+            // $cari = Petugas::where('user_id', Crypt::decrypt($id))->first();
+            $petugas = Petugas::findOrFail(Crypt::decrypt($id));
+            $user = User::findOrFail($petugas->user_id);
+            if ($petugas->update($params1) && $user->update($params2)) {
+                alert()->success('Success', 'Data Berhasil Disimpan');
+            } else {
+                alert()->error('Error', 'Data Gagal Disimpan');
+            }
         }
 
         return redirect()->route('SuperAdmin.master.akun.index')->with('success', 'Data berhasil diperbarui');
@@ -384,29 +409,35 @@ class ManajemenAkunController extends Controller
         $request->validate([
             'username' => 'required|string|max:255',
         ]);
+        $existingUser = User::where('username', $request->username)->first();
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
+        } else {
 
-        $params1 = $request->all();
-        $params2 = [
-            'username' => $request->username,
-            'password' => Hash::make('123456789'),
-            'role' => 'nasabah',
-            'status' => 'aktif',
-        ];
-        $user = User::create($params2);
-        if ($user) {
-            $params1['user_id'] = $user->id;
-            $params1['kode_pengguna'] = generateRandomCode(12);
-            $nasabah = Nasabah::create($params1);
-            $params3 = [
-                'nasabah_id' => $nasabah->id,
-                'total' => 0,
+            $params1 = $request->all();
+            $params2 = [
+                'username' => $request->username,
+                'password' => Hash::make('123456789'),
+                'role' => 'nasabah',
+                'status' => 'aktif',
             ];
-            $poin = PoinNasabah::create($params3);
-            if ($nasabah && $poin) {
-                alert()->success('Success', 'Data Berhasil Disimpan');
-            } else {
-                $user->delete();
-                alert()->error('Error', 'Data Gagal Disimpan');
+            $user = User::create($params2);
+            if ($user) {
+                $params1['user_id'] = $user->id;
+                $params1['kode_pengguna'] = generateRandomCode(12);
+                $nasabah = Nasabah::create($params1);
+                $params3 = [
+                    'nasabah_id' => $nasabah->id,
+                    'total' => 0,
+                ];
+                $poin = PoinNasabah::create($params3);
+                if ($nasabah && $poin) {
+                    alert()->success('Success', 'Data Berhasil Disimpan');
+                } else {
+                    $user->delete();
+                    alert()->error('Error', 'Data Gagal Disimpan');
+                }
             }
         }
 
@@ -429,23 +460,29 @@ class ManajemenAkunController extends Controller
             ],
             // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        $params1 = $request->all();
-        $params2['username'] = $request->username;
-        // Pengecekan jika password konfirmasi tidak sama dengan password
-
-        if ($request->filled('password')) {
-            $params2['password'] = Hash::make($request->password);
+        $existingUser = User::where('username', $request->username)->first();
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
         } else {
-            $params2 = $request->except('password');
-        }
 
-        $nasabah = Nasabah::findOrFail(Crypt::decrypt($id));
-        $user = User::findOrFail($nasabah->user_id);
-        if ($nasabah->update($params1) && $user->update($params2)) {
-            alert()->success('Success', 'Data Berhasil Disimpan');
-        } else {
-            alert()->error('Error', 'Data Gagal Disimpan');
+            $params1 = $request->all();
+            $params2['username'] = $request->username;
+            // Pengecekan jika password konfirmasi tidak sama dengan password
+
+            if ($request->filled('password')) {
+                $params2['password'] = Hash::make($request->password);
+            } else {
+                $params2 = $request->except('password');
+            }
+
+            $nasabah = Nasabah::findOrFail(Crypt::decrypt($id));
+            $user = User::findOrFail($nasabah->user_id);
+            if ($nasabah->update($params1) && $user->update($params2)) {
+                alert()->success('Success', 'Data Berhasil Disimpan');
+            } else {
+                alert()->error('Error', 'Data Gagal Disimpan');
+            }
         }
 
         return redirect()->route('SuperAdmin.master.akun-nasabah.index-nasabah')->with('success', 'Data berhasil diperbarui');
