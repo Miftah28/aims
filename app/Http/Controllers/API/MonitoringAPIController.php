@@ -13,7 +13,7 @@ class MonitoringAPIController extends Controller
 {
     public function lihatpoin()
     {
-        $nasabah = PoinNasabah::where('id', Auth::user()->nasabah->id)->first();
+        $nasabah = PoinNasabah::where('nasabah_id', Auth::user()->nasabah->id)->first();
         return response()->json([
             'success' => true,
             'data' => [
