@@ -12,7 +12,7 @@ class KategoriSampahController extends Controller
 {
     public function index()
     {
-        $kategori = KategoriSampah::all();
+        $kategori = KategoriSampah::where('admin_id', Auth::user()->admin->id)->get();
         $data['kategori'] = $kategori;
         return view('admin.manajemen sampah.kategori sampah.index', $data);
     }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Laporan\LaporanPemasukanSampahController;
+use App\Http\Controllers\Admin\Laporan\LaporanPoinController;
 use App\Http\Controllers\Admin\Manajemen\JadwalTugasController;
 use App\Http\Controllers\Admin\Manajemen\KategoriSampahController;
 use App\Http\Controllers\Admin\Manajemen\LokasiController;
@@ -123,15 +125,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     // laporan
     //  laporan pemasukan dan pengeluaran poin
-    Route::get('admin/laporan/pemasukan-pengeluaran-poin', [ManajemenPetugasController::class, 'index'])->name('Admin.laporan.pemasukan-pengeluaran-poin.index');
-    Route::post('admin/laporan/pemasukan-pengeluaran-poin', [ManajemenPetugasController::class, 'store'])->name('Admin.laporan.pemasukan-pengeluaran-poin.store');
-    Route::put('admin/laporan/pemasukan-pengeluaran-poin/{id}', [ManajemenPetugasController::class, 'update'])->name('Admin.laporan.pemasukan-pengeluaran-poin.update');
-    Route::delete('admin/laporan/pemasukan-pengeluaran-poin/{id}', [ManajemenPetugasController::class, 'destroy'])->name('Admin.laporan.pemasukan-pengeluaran-poin.destroy');
+    Route::get('admin/laporan/penukaran-poin', [LaporanPoinController::class, 'index'])->name('Admin.laporan.penukaran-poin.index');
     //  laporan pemasukan sampah
-    Route::get('admin/laporan/pemasukan-sampah', [ManajemenPetugasController::class, 'index'])->name('Admin.laporan.pemasukan-sampah.index');
-    Route::post('admin/laporan/pemasukan-sampah', [ManajemenPetugasController::class, 'store'])->name('Admin.laporan.pemasukan-sampah.store');
-    Route::put('admin/laporan/pemasukan-sampah/{id}', [ManajemenPetugasController::class, 'update'])->name('Admin.laporan.pemasukan-sampah.update');
-    Route::delete('admin/laporan/pemasukan-sampah/{id}', [ManajemenPetugasController::class, 'destroy'])->name('Admin.laporan.pemasukan-sampah.destroy');
+    Route::get('admin/laporan/pemasukan-sampah', [LaporanPemasukanSampahController::class, 'index'])->name('Admin.laporan.pemasukan-sampah.index');
 
     // profile
     Route::get('admin/profile', [ProfileController::class, 'index'])->name('Admin.profile.index');

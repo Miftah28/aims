@@ -148,17 +148,17 @@
         </li><!-- End Manajemen sampah -->
 
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/laporan/pemasukan-pengeluaran-poin', 'admin/laporan/pemasukan-sampah') ? '' : 'collapsed' }}"
+            <a class="nav-link {{ request()->is('admin/laporan/penukaran-poin', 'admin/laporan/pemasukan-sampah') ? '' : 'collapsed' }}"
                 data-bs-target="#laporan-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-journal-text"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="laporan-nav"
-                class="nav-content {{ request()->is('admin/laporan/pemasukan-pengeluaran-poin', 'admin/laporan/pemasukan-sampah') ? '' : 'collapse' }} "
+                class="nav-content {{ request()->is('admin/laporan/penukaran-poin', 'admin/laporan/pemasukan-sampah') ? '' : 'collapse' }} "
                 data-bs-parent="#sidebar-nav">
                 <li>
-                    <a class="{{ request()->is('admin/laporan/pemasukan-pengeluaran-poin') ? 'active' : 'collapsed' }}"
-                        href="{{ route('Admin.laporan.pemasukan-pengeluaran-poin.index') }}">
-                        <i class="bi bi-circle"></i><span>Laporan Pengeluaran Poin</span>
+                    <a class="{{ request()->is('admin/laporan/penukaran-poin') ? 'active' : 'collapsed' }}"
+                        href="{{ route('Admin.laporan.penukaran-poin.index') }}">
+                        <i class="bi bi-circle"></i><span>Laporan Penukaran Poin Nasabah</span>
                     </a>
                 </li>
                 <li>
