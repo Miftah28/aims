@@ -21,7 +21,7 @@ class KategoriSampahController extends Controller
         $request->validate([
             'jenis_sampah' => 'required|string|max:25',
             'berat_sampah' => 'required|integer|max:100|min:1',
-            'poin_sampah' => 'required|integer|max:1000',
+            'poin_sampah' => 'required|integer|max:1000000',
         ]);
 
         $params1 = $request->all();
@@ -40,7 +40,7 @@ class KategoriSampahController extends Controller
         $request->validate([
             'jenis_sampah' => 'required|string|max:25',
             'berat_sampah' => 'required|integer|max:100|min:1',
-            'poin_sampah' => 'required|integer|max:1000',
+            'poin_sampah' => 'required|integer|max:1000000',
         ]);
 
         $params1 = $request->all();
