@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum', 'user-access:petugas'])->group(function () {
     Route::get('/lihat-lokasi', [PemasukanPengeluaranAPIController::class, 'lihatlokasi']);
-    Route::get('/lihat-riwayat-tukar-poin', [PemasukanPengeluaranAPIController::class, 'lihatriwayattukarpoin']);
+    Route::get('/lihat-riwayat-tukar-poin-petugas', [PemasukanPengeluaranAPIController::class, 'lihatriwayattukarpoin']);
     Route::post('/pemasukan-sampah/{id}', [PemasukanPengeluaranAPIController::class, 'pemasukansampah']);
     Route::post('/tukar-poin', [PemasukanPengeluaranAPIController::class, 'tukarpoin']);
     Route::get('/profile-petugas', [ProfileAPIController::class, 'profilepetugas']);

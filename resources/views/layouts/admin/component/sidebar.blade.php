@@ -34,12 +34,18 @@
             </ul>
         </li><!-- End Master -->
 
-        {{-- <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link {{ request()->is('superadmin/konfirmasi-akun') ? 'active' : 'collapsed' }}"
                 href="{{route('SuperAdmin.konfirmasi-akun.index')}}">
-                <i class="bi bi-newspaper"></i><span>Konfrimasi Akun</span>
+                <i class="bi bi-person-exclamation"></i><span>Konfrimasi Akun</span>
             </a>
-        </li><!-- End konfirmasi Akun --> --}}
+        </li><!-- End konfirmasi Akun -->
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('superadmin/konfirmasi-akun') ? 'active' : 'collapsed' }}"
+                href="{{route('SuperAdmin.konfirmasi-akun.index')}}">
+                <i class="bi bi-gear-fill"></i><span>Setting</span>
+            </a>
+        </li><!-- Setting -->
 
         <li class="nav-item">
             <a class="nav-link {{ request()->is('superadmin/profile') ? 'active' : 'collapsed' }}"
@@ -90,12 +96,6 @@
                         <i class="bi bi-circle"></i><span>Monitoring Pemasukan Sampah</span>
                     </a>
                 </li>
-                {{-- <li>
-                    <a class="{{ request()->is('admin/master/pemasukan-sampah') ? 'active' : 'collapsed' }}"
-                        href="{{ route('Admin.master.pemasukan-sampah.index') }}">
-                        <i class="bi bi-circle"></i><span>Monitoring Pemasukan Sampah</span>
-                    </a>
-                </li> --}}
                 <li>
                     <a class="{{ request()->is('admin/master/pemasukan-pengeluaran-poin') ? 'active' : 'collapsed' }}"
                         href="{{ route('Admin.master.pemasukan-pengeluaran-poin.index') }}">

@@ -11,7 +11,7 @@
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
-            {{-- @if ( Auth::user()->role === 'superadmin')
+            @if ( Auth::user()->role === 'superadmin')
             <li class="nav-item dropdown">
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -71,7 +71,7 @@
                 </ul><!-- End Notification Dropdown Items -->
 
             </li><!-- End Notification Nav -->
-            @endif --}}
+            @endif
 
             {{-- <li class="nav-item dropdown">
 

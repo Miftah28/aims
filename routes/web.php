@@ -56,9 +56,9 @@ Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
     Route::delete('superadmin/master/akun-nasabah/{id}', [ManajemenAkunController::class, 'destroynasabah'])->name('SuperAdmin.master.akun-nasabah.destroy-nasabah');
 
     // Konfirmasi akun
-    // Route::get('superadmin/konfirmasi-akun', [ManajemenAkunController::class, 'konfirmasiindex'])->name('SuperAdmin.konfirmasi-akun.index');
-    // Route::put('superadmin/konfirmasi-akun/konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasi'])->name('SuperAdmin.konfirmasi-akun.konfirmasi');
-    // Route::put('superadmin/konfirmasi-akun/tolak-konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasitolak'])->name('SuperAdmin.konfirmasi-akun.tolak-konfirmasi');
+    Route::get('superadmin/konfirmasi-akun', [ManajemenAkunController::class, 'konfirmasiindex'])->name('SuperAdmin.konfirmasi-akun.index');
+    Route::put('superadmin/konfirmasi-akun/konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasi'])->name('SuperAdmin.konfirmasi-akun.konfirmasi');
+    Route::put('superadmin/konfirmasi-akun/tolak-konfirmasi/{id}', [ManajemenAkunController::class, 'konfirmasitolak'])->name('SuperAdmin.konfirmasi-akun.tolak-konfirmasi');
 
     // profile
     Route::get('superadmin/profile', [superadminprofileController::class, 'index'])->name('SuperAdmin.profile.index');
