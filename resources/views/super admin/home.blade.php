@@ -19,7 +19,7 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
-                        <div class="card-body">
+                        <div class="card-body overflow-auto">
                             <h5 class="card-title">Admin <span>| Total</span></h5>
 
                             <div class="d-flex align-items-center">
@@ -42,7 +42,7 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
-                        <div class="card-body">
+                        <div class="card-body overflow-auto">
                             <h5 class="card-title">Petugas <span>| Total</span></h5>
 
                             <div class="d-flex align-items-center">
@@ -65,7 +65,7 @@
                 <div class="col-xxl-4 col-md-6">
                     <div class="card info-card sales-card">
 
-                        <div class="card-body">
+                        <div class="card-body overflow-auto">
                             <h5 class="card-title">Nasabah <span>| Total</span></h5>
 
                             <div class="d-flex align-items-center">

@@ -6,7 +6,7 @@
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Konfirmasi akun</li>
+            <li class="breadcrumb-item active">Konfirmasi Akun</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -15,10 +15,10 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Kelola Akun Nasabah</h5>
+                <div class="card-body overflow-auto">
+                    <h5 class="card-title">Konfirmasi Akun</h5>
                     <!-- Table with stripped rows -->
-                    <table class="table datatable">
+                    <table class="table datatable ">
                         <thead>
                             <tr>
                                 <th class="text-center" scope="col">Nama</th>
@@ -45,7 +45,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td class="text-center" colspan="5">Data Tidak Ditemukan</td>
+                                <td class="text-center" colspan="6">Data Tidak Ditemukan</td>
                             </tr>
                             @endforelse
                         </tbody>

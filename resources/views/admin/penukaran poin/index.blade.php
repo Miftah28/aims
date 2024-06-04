@@ -2,7 +2,7 @@
 
 @section('main-content')
 <div class="row justify-content-between">
-    <div class="col-10">
+    <div class="col-lg-10">
         <div class="pagetitle">
             <h1>Penukaran Poin</h1>
             <nav>
@@ -13,7 +13,7 @@
             </nav>
         </div><!-- End Page Title -->
     </div>
-    <div class="col-2 text-end">
+    <div class="col-lg-2 text-end">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create"><i
                 class="bi bi-arrow-left-right"></i> Tukar Poin</button>
     </div>
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body overflow-auto">
                     <h5 class="card-title">Penukaran Poin</h5>
                     <!-- Table with stripped rows -->
                     <table class="table datatable">
@@ -44,7 +44,7 @@
                                 <td>Nama Nasabah : {{$penukarans->nasabah->name}} <br> Kode Pengguna : {{$penukarans->nasabah->kode_pengguna}}</td>
                                 <td>
                                     {{-- Jenis Sampah : {{$penukarans->kategoriSampah->jenis_sampah}} <br> --}}
-                                    {{-- @php 
+                                    {{-- @php
                                     // $poins = ($penukarans->pemasukan_sampah * $penukarans->kategoriSampah->poin_sampah) / $penukarans->kategoriSampah->berat_sampah;
                                     $bagipoin = $penukarans->kurang_poin / poinsampah($penukarans->kategoriSampah->id)->jumlah_poin;
                                     $dapetduit = $bagipoin * poinsampah($penukarans->kategoriSampah->id)->jumlah_saldo;

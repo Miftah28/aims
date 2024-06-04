@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body overflow-auto">
                     <h5 class="card-title">Kelola Petugas Penjemputan</h5>
                     <!-- Table with stripped rows -->
                     <table class="table datatable">

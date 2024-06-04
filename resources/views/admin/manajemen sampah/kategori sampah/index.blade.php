@@ -2,7 +2,7 @@
 
 @section('main-content')
 <div class="row justify-content-between">
-    <div class="col-11">
+    <div class="col-lg-11">
         <div class="pagetitle">
             <h1>Kelola Kategori Sampah</h1>
             <nav>
@@ -14,7 +14,7 @@
             </nav>
         </div><!-- End Page Title -->
     </div>
-    <div class="col-1">
+    <div class="col-lg-1">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create"><i
                 class="bi bi-plus-lg"></i> Tambah</button>
     </div>
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body overflow-auto">
                     <h5 class="card-title">Kelola Kategori Sampah</h5>
                     <!-- Table with stripped rows -->
                     <table class="table datatable">

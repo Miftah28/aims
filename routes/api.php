@@ -21,14 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthAPIController::class, 'login']);
 Route::post('/logout', [AuthAPIController::class, 'logout']);
 Route::post('/register', [AuthAPIController::class, 'register']);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::get('/lihat-nasabah', [MonitoringAPIController::class, 'lihatnasabah']);
+Route::get('/lihat-kategori-sampah', [MonitoringAPIController::class, 'lihatkategorisampah']);
+Route::get('/lihat-kelola-poin', [MonitoringAPIController::class, 'lihatkelolapoin']);
 
 Route::middleware(['auth:sanctum', 'user-access:petugas'])->group(function () {
-    Route::get('/lihat-nasabah', [MonitoringAPIController::class, 'lihatnasabah']);
-    Route::get('/lihat-kategori-sampah', [MonitoringAPIController::class, 'lihatkategorisampah']);
-    Route::get('/lihat-kelola-poin', [MonitoringAPIController::class, 'lihatkelolapoin']);
     Route::get('/lihat-lokasi', [PemasukanPengeluaranAPIController::class, 'lihatlokasi']);
     Route::get('/lihat-riwayat-tukar-poin-petugas', [PemasukanPengeluaranAPIController::class, 'lihatriwayattukarpoin']);
     Route::post('/pemasukan-sampah/{id}', [PemasukanPengeluaranAPIController::class, 'pemasukansampah']);

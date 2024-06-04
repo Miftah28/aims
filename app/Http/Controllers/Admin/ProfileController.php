@@ -55,8 +55,6 @@ class ProfileController extends Controller
             // Add other validation rules for your input fields
         ]);
 
-        // Validate the request
-        // $request->validate($validationRules);
         try {
             $user = User::findOrFail(auth()->user()->id);
             // dd('hello');

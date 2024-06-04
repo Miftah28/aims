@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body overflow-auto">
                     <h5 class="card-title">Monitoring Pengeluaran Poin</h5>
                     <!-- Table with stripped rows -->
                     <table class="table datatable">

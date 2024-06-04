@@ -4,7 +4,7 @@
 
 {{-- @include('admin.manajemen sampah.kelola tempat penjemputan.css') --}}
 <div class="row justify-content-between">
-    <div class="col-11">
+    <div class="col-lg-11">
         <div class="pagetitle">
             <h1>Kelola Tempat Penjemputan Sampah</h1>
             <nav>
@@ -16,7 +16,7 @@
             </nav>
         </div><!-- End Page Title -->
     </div>
-    <div class="col-1">
+    <div class="col-lg-1">
         <a type="button" class="btn btn-primary" href="{{route('Admin.manajemen-sampah.kelola-tempat.create')}}"><i
                 class="bi bi-plus-lg"></i> Tambah</a>
     </div>
@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body overflow-auto">
                     <h5 class="card-title">Kelola Tempat Penjemputan Sampah</h5>
                     <!-- Table with stripped rows -->
                     <table class="table datatable">

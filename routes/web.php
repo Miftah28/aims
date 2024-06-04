@@ -39,7 +39,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // super admin
 Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
     // Master
-    //  kelola akun super admin, admin dan petugas 
+    //  kelola akun super admin, admin dan petugas
     Route::get('superadmin/master/akun', [ManajemenAkunController::class, 'index'])->name('SuperAdmin.master.akun.index');
     Route::post('superadmin/master/akun', [ManajemenAkunController::class, 'store'])->name('SuperAdmin.master.akun.store');
     Route::post('superadmin/master/akun/tambahpetugas/{id}', [ManajemenAkunController::class, 'storepetugas'])->name('SuperAdmin.master.akun.storepetugas');
@@ -124,10 +124,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('admin/manajemen-sampah/kelola-tugas/{id}', [TugasPetugasController::class, 'destroy'])->name('Admin.manajemen-sampah.kelola-tugas.destroy');
 
     // laporan
-    //  laporan pemasukan dan pengeluaran poin
+    //  laporan penukaran poin nasabah
     Route::get('admin/laporan/penukaran-poin', [LaporanPoinController::class, 'index'])->name('Admin.laporan.penukaran-poin.index');
+    Route::post('filter/laporan-penukaran-poin', [LaporanPoinController::class, 'filter'])->name('laporan.poin.filter');
     //  laporan pemasukan sampah
     Route::get('admin/laporan/pemasukan-sampah', [LaporanPemasukanSampahController::class, 'index'])->name('Admin.laporan.pemasukan-sampah.index');
+    Route::post('filter/laporan-pemasukan-sampah', [LaporanPemasukanSampahController::class, 'filter'])->name('laporan.sampah.filter');
 
     // profile
     Route::get('admin/profile', [ProfileController::class, 'index'])->name('Admin.profile.index');
