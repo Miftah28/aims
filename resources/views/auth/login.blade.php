@@ -37,7 +37,7 @@
                                         @csrf
 
                                         <div class="col-12">
-                                            <label for="username" class="form-label" >Username</label>
+                                            <label for="username" class="form-label" >Username/Email</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="username" class="form-control" id="username"

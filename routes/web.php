@@ -126,9 +126,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     // laporan
     //  laporan penukaran poin nasabah
     Route::get('admin/laporan/penukaran-poin', [LaporanPoinController::class, 'index'])->name('Admin.laporan.penukaran-poin.index');
+    Route::post('admin/laporan/penukaran-poin/cetak/{id}', [LaporanPoinController::class, 'cetak'])->name('Admin.laporan.penukaran-poin.cetak');
     Route::post('filter/laporan-penukaran-poin', [LaporanPoinController::class, 'filter'])->name('laporan.poin.filter');
     //  laporan pemasukan sampah
     Route::get('admin/laporan/pemasukan-sampah', [LaporanPemasukanSampahController::class, 'index'])->name('Admin.laporan.pemasukan-sampah.index');
+    Route::post('admin/laporan/pemasukan-sampah/cetak/{id}', [LaporanPemasukanSampahController::class, 'cetak'])->name('Admin.laporan.pemasukan-sampah.cetak');
     Route::post('filter/laporan-pemasukan-sampah', [LaporanPemasukanSampahController::class, 'filter'])->name('laporan.sampah.filter');
 
     // profile

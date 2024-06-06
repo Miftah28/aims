@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Laporan;
 
 use App\Http\Controllers\Controller;
 use App\Models\TukarPoint;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class LaporanPemasukanSampahController extends Controller
@@ -48,5 +50,22 @@ class LaporanPemasukanSampahController extends Controller
                 'dateto' => $dateto,
             ]);
         });
+    }
+
+    public function cetak(Request $request, $id)
+    {
+        // dd([
+        //     Crypt::decrypt($id),
+        //     $request->input('tanggalawal'),
+        //     $request->input('tanggalakhir'),
+        //     $request->input('role'),
+        // ]);
+        if ($request->input('tanggalawal') === null && $request->input('tanggalakhir') === null && $request->input('role') === null) {
+            $laporan = TukarPoint::where('admin_id', Crypt::decrypt($id))->where('status', 'tukar')->get();
+            $data['laporan'] = $laporan;
+            $pdf = PDF::loadView('admin.laporan. pengeluran poin', $data);
+            $pdf->setPaper('F4', 'landscape');
+            return $pdf->stream('Laporan-media.pdf');
+        }
     }
 }

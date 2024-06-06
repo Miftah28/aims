@@ -15,7 +15,7 @@
         </div><!-- End Page Title -->
     </div>
     <div class="col-lg-2 text-end">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create"><i
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#print"><i
                 class="bi bi-printer"></i> Cetak</button>
     </div>
 </div>
@@ -134,5 +134,23 @@
         </div>
     </div>
 </section>
+@include('admin.laporan.pengeluran poin.modal')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var roleSelect = document.getElementById('role');
+        var petugasContainer = document.getElementById('petugas-container');
 
+        // Initially hide the petugas container
+        petugasContainer.style.display = 'none';
+
+        roleSelect.addEventListener('change', function() {
+            if (roleSelect.value === 'petugas') {
+                petugasContainer.style.display = 'block';
+            } else {
+                petugasContainer.style.display = 'none';
+            }
+        });
+    });
+</script>
 @endsection

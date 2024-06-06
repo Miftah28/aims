@@ -65,13 +65,13 @@
 
         <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/penukaran-poin') ? '' : 'collapsed' }}" href="{{ route('Admin.penukaran-poin.index') }}">
-                <i class="bi bi-grid"></i>
+                <i class="bi bi-arrow-down-up"></i>
                 <span>Penukaran poin</span>
             </a>
         </li><!-- End penukaaran poin Nav -->
         <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/pemasukan-sampah') ? '' : 'collapsed' }}" href="{{ route('Admin.pemasukan-sampah.index') }}">
-                <i class="bi bi-grid"></i>
+                <i class="bi bi-box-arrow-in-down"></i>
                 <span>Pemasukan Sampah</span>
             </a>
         </li><!-- End Pemasukan Sampah poin Nav -->
@@ -79,7 +79,7 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/master/*') ? '' : 'collapsed' }}"
                 data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-card-list"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav"
                 class="nav-content {{ request()->is('admin/master/*') ? '' : 'collapse' }} "
@@ -150,7 +150,7 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/laporan/penukaran-poin', 'admin/laporan/pemasukan-sampah') ? '' : 'collapsed' }}"
                 data-bs-target="#laporan-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-newspaper"></i><span>Laporan</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="laporan-nav"
                 class="nav-content {{ request()->is('admin/laporan/penukaran-poin', 'admin/laporan/pemasukan-sampah') ? '' : 'collapse' }} "
@@ -173,7 +173,7 @@
         <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/profile') ? 'active' : 'collapsed' }}"
                 href="{{route('Admin.profile.index')}}">
-                <i class="bi bi-newspaper"></i><span>Profile</span>
+                <i class="bi bi-person-circle"></i><span>Profile</span>
             </a>
         </li><!-- End Profile -->
         @endif
