@@ -34,6 +34,7 @@ Route::middleware(['auth:sanctum', 'user-access:petugas'])->group(function () {
     Route::post('/pemasukan-sampah/{id}', [PemasukanPengeluaranAPIController::class, 'pemasukansampah']);
     Route::post('/tukar-poin', [PemasukanPengeluaranAPIController::class, 'tukarpoin']);
     Route::get('/profile-petugas', [ProfileAPIController::class, 'profilepetugas']);
+    Route::post('/edit/profile-petugas', [ProfileAPIController::class, 'editprofilepetugas']);
 });
 Route::middleware(['auth:sanctum', 'user-access:nasabah'])->group(function () {
     Route::get('/lihat-poin', [MonitoringAPIController::class, 'lihatpoin']);
@@ -41,4 +42,5 @@ Route::middleware(['auth:sanctum', 'user-access:nasabah'])->group(function () {
     Route::get('/kontribusi-sampah', [MonitoringAPIController::class, 'kontribusisampah']);
     Route::get('/pemasukan-sampah', [MonitoringAPIController::class, 'pemasukansampah']);
     Route::get('/profile-nasabah', [ProfileAPIController::class, 'profilenasabah']);
+    Route::post('/edit/profile-nasabah', [ProfileAPIController::class, 'editprofilenasabah']);
 });

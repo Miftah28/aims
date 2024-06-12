@@ -24,12 +24,12 @@ class ManajemenPetugasController extends Controller
     }
     public function store(Request $request)
     {
+        $existingUser = User::where('username', $request->username)->first();
+        if ($existingUser) {
+            alert()->error('Error', 'Email atau username sudah digunakan');
+            return redirect()->back();
+        }
         // dd(Auth::user()->admin->id);
-        $request->validate([
-            // 'username' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
-        ]);
-
         $params1 = $request->all();
         $params2 = [
             'username' => $request->username,
@@ -37,9 +37,6 @@ class ManajemenPetugasController extends Controller
             'role' => 'petugas',
             'status' => 'aktif',
         ];
-        if ($request->has('image')) {
-            $params1['image'] = $this->simpanImage($params2['role'], $request->file('image'), $params1['name']);
-        }
 
         $user = User::create($params2);
         if ($user) {
@@ -82,17 +79,6 @@ class ManajemenPetugasController extends Controller
             $params2['password'] = Hash::make($request->password);
         } else {
             $params2 = $request->except('password');
-        }
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            if ($file->isValid()) {
-                $params1['image'] = $this->simpanImage($params2['role'], $file, $params1['name']);
-            } else {
-                return redirect()->back()->with('error', 'File foto tidak valid');
-            }
-        } else {
-            $params1 = $request->except('image');
         }
         // $cari = Petugas::where('user_id', Crypt::decrypt($id))->first();
         $petugas = Petugas::findOrFail(Crypt::decrypt($id));

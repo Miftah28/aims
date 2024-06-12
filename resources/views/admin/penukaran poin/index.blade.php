@@ -43,15 +43,7 @@
                                 <td scope="row">{{ $loop->iteration }}</td>
                                 <td>Nama Nasabah : {{$penukarans->nasabah->name}} <br> Kode Pengguna : {{$penukarans->nasabah->kode_pengguna}}</td>
                                 <td>
-                                    {{-- Jenis Sampah : {{$penukarans->kategoriSampah->jenis_sampah}} <br> --}}
-                                    {{-- @php
-                                    // $poins = ($penukarans->pemasukan_sampah * $penukarans->kategoriSampah->poin_sampah) / $penukarans->kategoriSampah->berat_sampah;
-                                    $bagipoin = $penukarans->kurang_poin / poinsampah($penukarans->kategoriSampah->id)->jumlah_poin;
-                                    $dapetduit = $bagipoin * poinsampah($penukarans->kategoriSampah->id)->jumlah_saldo;
-                                    // $sisasaldo =  poinsampah($penukarans->kategoriSampah->id)->total - $penukarans->kurang_poin;
-                                    @endphp --}}
                                     Poin Berkurang : <span style="color: red">- {{$penukarans->kurang_poin}}</span>  <br>
-                                    {{-- Sisa Poin : {{$sisasaldo}} <br> --}}
                                     Dapat Uang : Rp. {{ number_format( caripoin($penukarans->point_id)->jumlah_saldo, 0, ',', '.') }}
                                 </td>
                                 <td class="text-center">{{$penukarans->admin->instansi}}</td>
