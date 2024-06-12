@@ -24,9 +24,9 @@ Route::post('/register', [AuthAPIController::class, 'register']);
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::get('/lihat-nasabah', [MonitoringAPIController::class, 'lihatnasabah']);
 
 Route::middleware(['auth:sanctum', 'user-access:petugas'])->group(function () {
+    Route::get('/lihat-nasabah', [MonitoringAPIController::class, 'lihatnasabah']);
     Route::get('/lihat-kategori-sampah', [MonitoringAPIController::class, 'lihatkategorisampah']);
     Route::get('/lihat-kelola-poin', [MonitoringAPIController::class, 'lihatkelolapoin']);
     Route::get('/lihat-lokasi', [PemasukanPengeluaranAPIController::class, 'lihatlokasi']);

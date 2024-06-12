@@ -10,6 +10,7 @@
     @include('layouts.landing page.component.hero')
 
     <main id="main">
+        @include('sweetalert::alert')
 
         @include('layouts.landing page.component.about')
 

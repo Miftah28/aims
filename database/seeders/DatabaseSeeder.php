@@ -10,6 +10,7 @@ use App\Models\Nasabah;
 use App\Models\Petugas;
 use App\Models\PoinNasabah;
 use App\Models\Point;
+use App\Models\Setting;
 use App\Models\SuperAdmin;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -147,5 +148,12 @@ class DatabaseSeeder extends Seeder
                 'total' => 0,
             ]);
         }
+        Setting::create([
+            'nama_aplikasi' => 'CleanEarth',
+            'deskripsi' => 'Aplikasi CleanEarth adalah solusi inovatif untuk manajemen sampah di berbagai daerah. Aplikasi ini memungkinkan pengguna untuk mencatat dan mengelola data sampah di lokasi-lokasi tertentu. Selain itu, CleanEarth menawarkan fitur unik yang memungkinkan pengguna untuk menukar sampah yang dapat didaur ulang dengan poin. Poin-poin yang terkumpul kemudian dapat ditukarkan dengan uang tunai, memberikan insentif bagi masyarakat untuk lebih aktif dalam kegiatan daur ulang dan menjaga kebersihan lingkungan. Dengan CleanEarth, pengelolaan sampah menjadi lebih efisien dan memberikan manfaat ekonomi bagi penggunanya.',
+            'no_telp' => '087848512592',
+            'email' => 'aplikasiaims@gmail.com',
+            'alamat' => 'Jalan nanas ',
+        ]);
     }
 }

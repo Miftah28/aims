@@ -6,9 +6,14 @@ use App\Models\Petugas;
 use App\Models\PetugasJemput;
 use App\Models\PoinNasabah;
 use App\Models\Point;
+use App\Models\Sampah;
+use App\Models\Setting;
 use App\Models\SuperAdmin;
+use App\Models\Team;
+use App\Models\TukarPoint;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -160,5 +165,75 @@ if (!function_exists('countnasabahpersen')) {
         $total = User::where('role', 'nasabah')->count();
         $results = ($totalaktif / $total) * 100;
         return $results;
+    }
+}
+
+if (!function_exists('countpemasukansampah')) {
+    function countpemasukansampah()
+    {
+        $results = Sampah::where('admin_id', Auth::user()->admin->id)->sum('pemasukan_sampah');
+        return $results;
+    }
+}
+if (!function_exists('onepige')) {
+    function onepige()
+    {
+        $results = Setting::where('id', 1)->first();
+        return $results;
+    }
+}
+
+if (!function_exists('countpetugasadmin')) {
+    function countpetugasadmin()
+    {
+        $results = User::join('petugas', 'users.id', '=', 'petugas.user_id')
+            ->where('users.role', 'petugas')
+            ->where('users.status', 'aktif')
+            ->where('petugas.admin_id', Auth::user()->admin->id)
+            ->count();
+
+        return $results;
+    }
+}
+
+if (!function_exists('countpetugaspersenadmin')) {
+    function countpetugaspersenadmin()
+    {
+        $totalaktif = User::join('petugas', 'users.id', '=', 'petugas.user_id')
+            ->where('users.role', 'petugas')
+            ->where('users.status', 'aktif')
+            ->where('petugas.admin_id', Auth::user()->admin->id)
+            ->count();
+        $total = User::join('petugas', 'users.id', '=', 'petugas.user_id')
+            ->where('users.role', 'petugas')
+            ->where('petugas.admin_id', Auth::user()->admin->id)
+            ->count();
+        $results = ($totalaktif / $total) * 100;
+        return $results;
+    }
+    if (!function_exists('limit_sentences')) {
+        function limit_sentences($text, $limit = 8)
+        {
+            $sentences = preg_split('/(?<=[.?!])\s+/', $text, $limit + 1, PREG_SPLIT_NO_EMPTY);
+            if (count($sentences) > $limit) {
+                array_pop($sentences);
+                return implode(' ', $sentences) . '...';
+            }
+            return implode(' ', $sentences);
+        }
+    }
+    if (!function_exists('counttotalsemua')) {
+        function counttotalsemua()
+        {
+            $results = User::where('status', 'aktif')->where('role', '!=', 'superadmin')->count();
+            return $results;
+        }
+    }
+    if (!function_exists('team')) {
+        function team()
+        {
+            $results = Team::all();
+            return $results;
+        }
     }
 }

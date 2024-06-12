@@ -8,18 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Setting extends Model
+class KotakSaran extends Model
 {
     use HasFactory;
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = [
-        'logo',
-        'nama_aplikasi',
-        'deskripsi',
-        'no_telp',
+        'nama',
         'email',
-        'alamat',
+        'saran',
     ];
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cetak Tukar Poin Nasabah</title>
+    <title>Cetak Data Pemasukan Sampah</title>
     <style>
         @page {
             size: F4 landscape;
@@ -94,14 +94,13 @@
             <tr>
                 <th scope="col">No</th>
                 <th class="text-center" scope="col">Nasabah</th>
-                <th class="text-center" scope="col">Petugas Penukaran</th>
+                <th class="text-center" scope="col">Petugas</th>
                 <th class="text-center" scope="col">Tukar Poin</th>
                 <th class="text-center" scope="col">Instansi</th>
                 <th class="text-center" scope="col">status</th>
             </tr>
-        </thead>
+            </thead>
         <tbody>
-
             @forelse ($laporan as $laporans)
             <tr>
                 <td scope="row">{{ $loop->iteration }}</td>
@@ -111,20 +110,26 @@
                     @if ($laporans->petugas_id != null)
                     Admin : {{$laporans->admin->name}} <br>
                     Petugas : {{$laporans->petugas->name}} <br>
-                    Tanggal: {{ \Carbon\Carbon::parse($laporans->tanggal)->format('d F Y H:i') }}
-                    <br>
+                    Tanggal: {{ \Carbon\Carbon::parse($laporans->tanggal)->format('d F Y H:i') }} <br>
+                    Tempat:<a
+                        href="https://www.google.com/maps/search/?api=1&query={{ $laporans->sampah->lokasi->koordinat }}"
+                        target="_blank">
+                        {{ $laporans->sampah->lokasi->tempat }}
+                    </a> <br>
                     @else
                     Admin : {{$laporans->admin->name}} <br>
                     Petugas : - <br>
-                    Tanggal: {{ \Carbon\Carbon::parse($laporans->tanggal)->format('d F Y H:i') }}
-                    <br>
+                    Tanggal: {{ \Carbon\Carbon::parse($laporans->tanggal)->format('d F Y H:i') }} <br>
+                    Tempat : Datang langsung ke lokasi
                     @endif
                 </td>
                 <td>
-                    Poin Berkurang : <span style="color: red">- {{$laporans->kurang_poin}}</span>
+                    Jenis Sampah : {{$laporans->sampah->kategoriSampah->jenis_sampah}} <br>
+                    Berat Sampah : {{$laporans->sampah->pemasukan_sampah}} KG <br>
+                    Poin Bertambah : <span style="color: green">+
+                        {{$laporans->sampah->kategoriSampah->poin_sampah *
+                        $laporans->sampah->pemasukan_sampah}}</span>
                     <br>
-                    Dapat Uang : Rp. {{ number_format( caripoin($laporans->point_id)->jumlah_saldo,
-                    0, ',', '.') }}
                 </td>
                 <td class="text-center">{{$laporans->admin->instansi}}</td>
                 <td>{{$laporans->status}}</td>

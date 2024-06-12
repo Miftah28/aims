@@ -41,9 +41,15 @@
             </a>
         </li><!-- End konfirmasi Akun -->
         <li class="nav-item">
-            <a class="nav-link {{ request()->is('superadmin/konfirmasi-akun') ? 'active' : 'collapsed' }}"
-                href="{{route('SuperAdmin.konfirmasi-akun.index')}}">
+            <a class="nav-link {{ request()->is('superadmin/setting') ? 'active' : 'collapsed' }}"
+                href="{{route('SuperAdmin.setting.index')}}">
                 <i class="bi bi-gear-fill"></i><span>Setting</span>
+            </a>
+        </li><!-- Setting -->
+        <li class="nav-item">
+            <a class="nav-link {{ request()->is('superadmin/kotak-saran') ? 'active' : 'collapsed' }}"
+                href="{{route('SuperAdmin.Kotak-Saran.index')}}">
+                <i class="bi bi-envelope-paper"></i><span>Kotak Saran</span>
             </a>
         </li><!-- Setting -->
 

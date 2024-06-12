@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SuperAdmin\ProfileController as superadminprofileController;
 use App\Http\Controllers\SuperAdmin\Master\ManajemenAkunController;
+use App\Http\Controllers\SuperAdmin\setting\KotakSaranController;
+use App\Http\Controllers\SuperAdmin\setting\SettingController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +66,16 @@ Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
     Route::get('superadmin/profile', [superadminprofileController::class, 'index'])->name('SuperAdmin.profile.index');
     Route::put('superadmin/profile', [superadminprofileController::class, 'update'])->name('SuperAdmin.profile.update');
     Route::put('superadmin/profile/reset-password', [superadminprofileController::class, 'reset'])->name('SuperAdmin.profile.reset');
+
+    // Setting
+    Route::get('superadmin/setting', [SettingController::class, 'index'])->name('SuperAdmin.setting.index');
+    Route::put('superadmin/setting', [SettingController::class, 'update'])->name('SuperAdmin.setting.update');
+    Route::post('superadmin/setting/team', [SettingController::class, 'createteam'])->name('SuperAdmin.setting.create-team');
+    Route::put('superadmin/setting/team/{id}', [SettingController::class, 'updateteam'])->name('SuperAdmin.setting.update-team');
+    Route::delete('superadmin/setting/team/{id}', [SettingController::class, 'destroyteam'])->name('SuperAdmin.setting.destroy-team');
+
+    // Kotak saran
+    Route::get('superadmin/kotak-saran', [KotakSaranController::class, 'index'])->name('SuperAdmin.Kotak-Saran.index');
 });
 
 // admin
@@ -142,3 +154,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 // register
 Route::post('register', [RegisterController::class, 'create'])->name('register');
 Route::get('register', [RegisterController::class, 'index'])->name('register.index');
+
+// post kotak saran
+Route::post('kirim/kotak-saran', [KotakSaranController::class, 'kirim'])->name('kirim.kotak-saran');
