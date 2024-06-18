@@ -64,12 +64,10 @@
                                     @if ($diffInSeconds < 300)
                                     <td class="text-center">
                                         <a href="#edit{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                        <a href="#delete{{ $sampahs->id }}" data-bs-toggle="modal" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                                     </td>
                                     @else
                                         <td class="text-center">
                                             <button disabled class="btn btn-warning"><i class="bi bi-pencil-square"></i></button>
-                                            <button disabled class="btn btn-danger"><i class="bi bi-trash"></i></button>
                                         </td>
                                     @endif
                                 @endif
