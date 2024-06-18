@@ -101,7 +101,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-3 col-md-4 label">Username</div>
+                                <div class="col-lg-3 col-md-4 label">Email</div>
                                 <div class="col-lg-9 col-md-8">{{$admin->user->username}}</div>
                             </div>
 
@@ -141,9 +141,9 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="username" class="col-md-4 col-lg-3 col-form-label">Username</label>
+                                    <label for="username" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="username" type="text" class="form-control" id="username"
+                                        <input name="username" type="email" class="form-control" id="username"
                                             value="{{$admin->user->username}}">
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@
     $(document).ready(function() {
 
         // Initialize Select2 for the edit modals (loop through each edit modal)
-        
+
         $('#jabatanedit, #dinas_idedit').select2({
             theme: 'bootstrap',
             dropdownParent: $('#profile-edit')

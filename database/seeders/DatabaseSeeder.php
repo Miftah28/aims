@@ -14,6 +14,8 @@ use App\Models\Setting;
 use App\Models\SuperAdmin;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -148,7 +150,26 @@ class DatabaseSeeder extends Seeder
                 'total' => 0,
             ]);
         }
+        $sourcePath = public_path('assets/admin/img/waste-management.jpg');
+
+        // Define the destination folder and file name
+        $destinationFolder = 'uploads/onpige/logo';
+        $destinationFileName = 'waste-management.jpg';
+
+        // Ensure the directory exists
+        if (!Storage::disk('public')->exists($destinationFolder)) {
+            Storage::disk('public')->makeDirectory($destinationFolder);
+        }
+
+        // Define the full destination path
+        $destinationPath = $destinationFolder . '/' . $destinationFileName;
+
+        // Copy the file to the destination path
+        Storage::disk('public')->put($destinationPath, File::get($sourcePath));
+
+        // Create the setting record
         Setting::create([
+            'logo' => $destinationPath,
             'nama_aplikasi' => 'CleanEarth',
             'deskripsi' => 'Aplikasi CleanEarth adalah solusi inovatif untuk manajemen sampah di berbagai daerah. Aplikasi ini memungkinkan pengguna untuk mencatat dan mengelola data sampah di lokasi-lokasi tertentu. Selain itu, CleanEarth menawarkan fitur unik yang memungkinkan pengguna untuk menukar sampah yang dapat didaur ulang dengan poin. Poin-poin yang terkumpul kemudian dapat ditukarkan dengan uang tunai, memberikan insentif bagi masyarakat untuk lebih aktif dalam kegiatan daur ulang dan menjaga kebersihan lingkungan. Dengan CleanEarth, pengelolaan sampah menjadi lebih efisien dan memberikan manfaat ekonomi bagi penggunanya.',
             'no_telp' => '087848512592',

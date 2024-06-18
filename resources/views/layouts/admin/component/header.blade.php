@@ -3,7 +3,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-            <img src="{{asset('assets/admin/img/waste-management.jpg')}}" alt="">
+            <img src="{{ asset('storage/'.onepige()->logo) }}" alt="">
             <span class="d-none d-lg-block" style="color: #fff">CleanEarth</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -45,7 +45,7 @@
                                     // Jika perbedaan waktu kurang dari 60 detik, gunakan detik
                                     if ($diffInSeconds < 60) {
                                         $formattedTime = $diffInSeconds . ' Detik Lalu';
-                                    } 
+                                    }
                                     // Jika perbedaan waktu kurang dari 1 jam, gunakan menit
                                     elseif ($diffInSeconds < 3600) {
                                         $diffInMinutes = floor($diffInSeconds / 60);
@@ -55,7 +55,7 @@
                                     elseif ($diffInSeconds < 86400) {
                                         $diffInHours = floor($diffInSeconds / 3600);
                                         $formattedTime = $diffInHours . ' Jam Lalu';
-                                    } 
+                                    }
                                     // Jika lebih dari 24 jam, gunakan hari
                                     else {
                                         $diffInDays = floor($diffInSeconds / 86400);

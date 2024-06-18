@@ -2,12 +2,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title> CleanEarth</title>
+    <title>{{onepige()->nama_aplikasi}}</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ url('assets/admin/img/waste-management.jpg') }}" rel="icon">
+    <link href="{{  asset('storage/'.onepige()->logo)  }}" rel="icon">
     {{-- <link href="{{ url('assets/admin/img/apple-touch-icon.png') }}" rel="apple-touch-icon"> --}}
 
     <!-- Google Fonts -->

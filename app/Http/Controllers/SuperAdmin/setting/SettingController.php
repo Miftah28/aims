@@ -122,14 +122,14 @@ class SettingController extends Controller
             $filePath = $file->storeAs($folder, $fileName, 'public');
             return $filePath;
         } else {
-            $path = public_path('storage/uploads/onpige/' . $type . '/' . $dt->format('Y-m-d') . '/' . $nama);
+            $path = public_path('storage/uploads/onpige/' . $type . '/' . $nama);
             if (!File::isDirectory($path)) {
                 File::makeDirectory($path, 0755, true, true);
             }
             $file = $foto;
             $name =  $type . '_' . $nama . '_' . $dt->format('Y-m-d');
             $fileName = $name . '.' . $file->getClientOriginalExtension();
-            $folder = '/uploads/onpige/' . $type . '/' . $dt->format('Y-m-d') . '/' . $nama;
+            $folder = '/uploads/onpige/' . $type . '/' . $nama;
 
             $check = public_path($folder) . $fileName;
 
