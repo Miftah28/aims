@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id');
             // $table->unsignedBigInteger('kategori_sampah_id');
             $table->integer('jumlah_poin');
-            $table->integer('jumlah_saldo');
+            $table->double('jumlah_saldo');
             $table->timestamps();
             $table->softDeletes();
 

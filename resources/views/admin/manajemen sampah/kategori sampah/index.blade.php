@@ -31,6 +31,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th class="text-center" scope="col">Gambar</th>
                                 <th class="text-center" scope="col">Jenis Sampah</th>
                                 <th class="text-center" scope="col">Berat Sampah</th>
                                 <th class="text-center" scope="col">Poin Perberat Sampah</th>
@@ -41,14 +42,15 @@
                             @forelse ($kategori as $kategoris)
                             <tr>
                                 <td scope="row">{{ $loop->iteration }}</td>
+                                <td> <img src="{{asset('storage/'.$kategoris->gambar)}}" alt="" width="100" height="100"></td>
                                 <td>{{$kategoris->jenis_sampah}}</td>
                                 <td class="text-center">{{$kategoris->berat_sampah}} KG</td>
                                 <td class="text-center">{{$kategoris->poin_sampah}}</td>
                                 <td class="text-center">
-                                    <a href="#edit{{ $kategoris->id }}" data-bs-toggle="modal" class="btn btn-warning"><i
-                                            class="bi bi-pencil-square"></i></a>
-                                    <a href="#delete{{ $kategoris->id }}" data-bs-toggle="modal" class="btn btn-danger"><i
-                                            class="bi bi-trash"></i></a>
+                                    <a href="#edit{{ $kategoris->id }}" data-bs-toggle="modal"
+                                        class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    <a href="#delete{{ $kategoris->id }}" data-bs-toggle="modal"
+                                        class="btn btn-danger"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                             @empty

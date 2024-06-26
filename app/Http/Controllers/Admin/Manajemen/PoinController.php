@@ -23,13 +23,23 @@ class PoinController extends Controller
     }
     public function store(Request $request)
     {
+
         $request->validate(
             [
                 'jumlah_poin'  => 'required|integer|max:10000000',
-                'jumlah_saldo'  => 'required|integer|max:10000000',
+                // 'jumlah_saldo'  => 'required|double|max:10000000',
             ]
         );
         $params = $request->all();
+        // dd($request->all());
+        $saldo = $params['jumlah_saldo'];
+
+        // Menghapus simbol 'Rp.', spasi, dan titik pemisah ribuan
+        $saldo = str_replace(['Rp', '.', ' '], '', $saldo);
+
+        // Mengonversi string yang telah dibersihkan menjadi double
+        $params['jumlah_saldo'] = (float) $saldo;
+
         $params['admin_id'] = Auth::user()->admin->id;
         $poin = Point::create($params);
         if ($poin) {
@@ -43,10 +53,18 @@ class PoinController extends Controller
     {
         $request->validate([
             'jumlah_poin'  => 'required|integer|max:10000000',
-            'jumlah_saldo'  => 'required|integer|max:10000000',
+            // 'jumlah_saldo'  => 'required|integer|max:10000000',
         ]);
+        // dd($request->all());
         $params = $request->all();
         $poin = Point::findOrFail(Crypt::decrypt($id));
+        $saldo = $params['jumlah_saldo'];
+
+        // Menghapus simbol 'Rp.', spasi, dan titik pemisah ribuan
+        $saldo = str_replace(['Rp', '.', ' '], '', $saldo);
+
+        // Mengonversi string yang telah dibersihkan menjadi double
+        $params['jumlah_saldo'] = (float) $saldo;
         if ($poin->update($params)) {
             alert()->success('Success', 'Data Berhasil Diubah');
         } else {

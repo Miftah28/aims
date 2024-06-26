@@ -23,10 +23,14 @@
                                 <input id="berat_sampah" type="number" class="form-control" name="berat_sampah"
                                     required>
                             </div>
-                            <div class="col-12 mb-3">
+                            <div class="col-6 mb-3">
                                 <label for="poin_sampah" class="form-label"><span style="color: red;">*</span>
                                     Poin Perberat Sampah</label>
                                 <input id="poin_sampah" type="number" class="form-control" name="poin_sampah" required>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="gambar" class="form-label"><span style="color: red;">*</span> Gambar</label>
+                                <input type="file" class="form-control" id="gambar" name="gambar" accept=".jpg, .jpeg, .png" required>
                             </div>
                         </div>
                     </div>
@@ -69,11 +73,15 @@
                                 <input id="berat_sampah" type="number" class="form-control" name="berat_sampah"
                                     value="{{ $kategoris->berat_sampah }}">
                             </div>
-                            <div class="col-12 mb-3">
+                            <div class="col-6 mb-3">
                                 <label for="poin_sampah" class="form-label"><span style="color: red;">*</span>
                                     Poin Sampah</label>
                                 <input id="poin_sampah" type="number" class="form-control" name="poin_sampah"
                                     value="{{ $kategoris->poin_sampah }}">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label for="gambar" class="form-label"><span style="color: red;">*</span> Gambar</label>
+                                <input type="file" class="form-control" id="gambar" name="gambar" accept=".jpg, .jpeg, .png">
                             </div>
                         </div>
                         <div class="modal-footer">

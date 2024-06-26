@@ -10,10 +10,10 @@ class KategoriSampah extends Model
     use HasFactory;
     protected $fillable = [
         'admin_id',
+        'gambar',
         'jenis_sampah',
         'poin_sampah',
         'berat_sampah',
-        // 'harga_perkilogram',
     ];
     public function admin()
     {

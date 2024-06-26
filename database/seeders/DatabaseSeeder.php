@@ -51,23 +51,23 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $user->id,
                 'instansi' => 'DLH Indramayu',
             ]);
-            KategoriSampah::create([
-                'admin_id' => $admin->id,
-                'jenis_sampah' => 'plastik botol',
-                'berat_sampah' => 1,
-                'poin_sampah' => 500,
-            ]);
-            KategoriSampah::create([
-                'admin_id' => $admin->id,
-                'jenis_sampah' => 'alimunium',
-                'berat_sampah' => 1,
-                'poin_sampah' => 700,
-            ]);
-            Point::create([
-                'admin_id' => $admin->id,
-                'jumlah_poin' => 10000,
-                'jumlah_saldo' => 100000,
-            ]);
+            // KategoriSampah::create([
+            //     'admin_id' => $admin->id,
+            //     'jenis_sampah' => 'plastik botol',
+            //     'berat_sampah' => 1,
+            //     'poin_sampah' => 500,
+            // ]);
+            // KategoriSampah::create([
+            //     'admin_id' => $admin->id,
+            //     'jenis_sampah' => 'alimunium',
+            //     'berat_sampah' => 1,
+            //     'poin_sampah' => 700,
+            // ]);
+            // Point::create([
+            //     'admin_id' => $admin->id,
+            //     'jumlah_poin' => 10000,
+            //     'jumlah_saldo' => 10000,
+            // ]);
         }
         $user = User::create([
             'username' => 'petugas1@gmail.com',

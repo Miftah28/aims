@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('kategori_sampahs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('admin_id');
+            $table->string('gambar')->nullable();
             $table->string('jenis_sampah');
             $table->integer('poin_sampah');
             $table->double('berat_sampah');
-            // $table->integer('harga_perkilogram');
             $table->timestamps();
             $table->softDeletes();
 

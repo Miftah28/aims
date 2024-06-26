@@ -12,29 +12,16 @@
                     {{ csrf_field() }}
                     <div class="container">
                         <div class="row justify-content-start">
-                            {{-- <div class="col-12 mb-3">
-                                <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
-                                    Jenis Sampah</label>
-                                <select class="selectpicker" data-live-search="true" data-width="100%"
-                                    name="kategori_sampah_id">
-                                    <option value="">Pilih Jenis Sampah </option>
-                                    @forelse ($kategori as $kategoris)
-                                    <option value="{{ $kategoris->id }}">{{ $kategoris->jenis_sampah }}</option>
-                                    @empty
-                                    <option value="NULL">Jenis Sampah belum diinput</option>
-                                    @endforelse
-                                </select>
-                            </div> --}}
                             <div class="col-6 mb-3">
-                                <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span>
-                                    Jumlah Poin</label>
+                                <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span> Jumlah
+                                    Poin</label>
                                 <input id="jumlah_poin" type="number" class="form-control" name="jumlah_poin" required>
                             </div>
                             <div class="col-6 mb-3">
-                                <label for="jumlah_saldo" class="form-label"><span style="color: red;">*</span>
-                                    Jumlah Saldo</label>
-                                <input id="jumlah_saldo" type="number" class="form-control" name="jumlah_saldo"
-                                    required>
+                                <label for="jumlah_saldo" class="form-label"><span style="color: red;">*</span> Jumlah
+                                    Saldo</label>
+                                <input id="jumlah_saldo" type="text" class="form-control" name="jumlah_saldo" required
+                                    readonly>
                             </div>
                         </div>
                     </div>
@@ -47,6 +34,29 @@
         </form>
     </div>
 </div><!-- End Create Modal-->
+<script>
+    document.getElementById('jumlah_poin').addEventListener('input', function() {
+        var jumlahPoin = this.value;
+        var formattedRupiah = formatRupiah(jumlahPoin);
+        document.getElementById('jumlah_saldo').value = formattedRupiah;
+    });
+
+    function formatRupiah(angka) {
+        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        if (ribuan) {
+            var separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+        return 'Rp ' + rupiah;
+    }
+</script>
 
 <!-- edit kelola poin -->
 @foreach ($poin as $poins )
@@ -65,46 +75,66 @@
                     {{ method_field('PUT') }}
                     <div class="container">
                         <div class="row justify-content-start">
-                            {{-- <div class="col-12 mb-3">
-                                <label for="kategori_sampah_id" class="form-label"><span style="color: red;">*</span>
-                                    Jenis Sampah</label>
-                                <select class="selectpicker" data-live-search="true" data-width="100%" name="kategori_sampah_id"
-                                    id="kategori_sampah_id" required>
-                                    <option value="">Pilih Jenis Sampah</option>
-                                    @forelse ($kategori as $kategoris)
-                                    <option value="{{ $kategoris->id }}" {{ $poins->kategori_sampah_id == $kategoris->id ? 'selected' :
-                                        ''
-                                        }}>
-                                        {{ $kategoris->jenis_sampah }}</option>
-                                    @empty
-                                    <option value="NULL">Jenis Sampah belum diinput</option>
-                                    @endforelse
-                                </select>
-                            </div> --}}
                             <div class="col-6 mb-3">
-                                <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span>
-                                    Jumlah Poin</label>
-                                <input id="jumlah_poin" type="number" class="form-control" name="jumlah_poin"
-                                    value="{{ $poins->jumlah_poin }}">
+                                <label for="jumlah_poin" class="form-label"><span style="color: red;">*</span> Jumlah
+                                    Poin</label>
+                                <input id="jumlah_poin{{$poins->id}}" type="number" class="form-control"
+                                    name="jumlah_poin" value="{{ $poins->jumlah_poin }}">
                             </div>
                             <div class="col-6 mb-3">
-                                <label for="jumlah_saldo" class="form-label"><span style="color: red;">*</span>
-                                    Jumlah Saldo</label>
-                                <input id="jumlah_saldo" type="number" class="form-control" name="jumlah_saldo"
-                                    value="{{ $poins->jumlah_saldo }}">
+                                <label for="jumlah_saldo" class="form-label"><span style="color: red;">*</span> Jumlah
+                                    Saldo</label>
+                                <input id="jumlah_saldo{{$poins->id}}" type="text" class="form-control"
+                                    name="jumlah_saldo" value="{{ $poins->jumlah_saldo }}" readonly>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-success">Simpan</button>
             </div>
         </div>
-        </form>
     </div>
+    </form>
+</div>
 </div>
 </div><!-- End edit kelola poin Modal-->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var poinInput = document.getElementById('jumlah_poin{{ $poins->id }}');
+        var saldoInput = document.getElementById('jumlah_saldo{{ $poins->id }}');
+
+        // Format saldo when the page loads
+        var initialJumlahPoin = poinInput.value;
+        if (initialJumlahPoin) {
+            saldoInput.value = formatRupiah(initialJumlahPoin);
+        }
+
+        // Update saldo when the poin input changes
+        poinInput.addEventListener('input', function() {
+            var jumlahPoin = this.value;
+            saldoInput.value = formatRupiah(jumlahPoin);
+        });
+
+        function formatRupiah(angka) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                var separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+            return 'Rp ' + rupiah;
+        }
+    });
+</script>
 
 <!-- delete kelola poin -->
 <div class="modal fade" id="delete{{ $poins->id }}" tabindex="-1" data-bs-backdrop="false">
