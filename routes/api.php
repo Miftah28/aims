@@ -41,6 +41,7 @@ Route::middleware(['auth:sanctum', 'user-access:nasabah'])->group(function () {
     Route::get('/lihat-riwayat-tukar-poin', [MonitoringAPIController::class, 'lihatriwayattukarpoin']);
     Route::get('/kontribusi-sampah', [MonitoringAPIController::class, 'kontribusisampah']);
     Route::get('/pemasukan-sampah', [MonitoringAPIController::class, 'pemasukansampah']);
+    Route::get('/kategori-sampah', [MonitoringAPIController::class, 'kategoriSampah']);
     Route::get('/profile-nasabah', [ProfileAPIController::class, 'profilenasabah']);
     Route::post('/edit/profile-nasabah', [ProfileAPIController::class, 'editprofilenasabah']);
 });

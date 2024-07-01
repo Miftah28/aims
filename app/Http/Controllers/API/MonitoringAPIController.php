@@ -101,4 +101,16 @@ class MonitoringAPIController extends Controller
             'message' => 'Sukses menampilkan data'
         ]);
     }
+
+    public function kategoriSampah()
+    {
+        $kategori = KategoriSampah::all();
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'kategori' => $kategori,
+            ],
+            'message' => 'Sukses menampilkan data'
+        ]);
+    }
 }

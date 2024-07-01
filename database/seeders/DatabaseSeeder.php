@@ -39,52 +39,47 @@ class DatabaseSeeder extends Seeder
                 // 'dinas_id' => $dinas->id,
             ]);
         }
-        $user = User::create([
-            'username' => 'admin@gmail.com',
-            'status' => 'aktif',
-            'password' => bcrypt('123456789'),
-            'role' => 'admin',
-        ]);
-        if ($user) {
-            $admin = Admin::create([
-                'name' => 'admin',
-                'user_id' => $user->id,
-                'instansi' => 'DLH Indramayu',
-            ]);
-            // KategoriSampah::create([
-            //     'admin_id' => $admin->id,
-            //     'jenis_sampah' => 'plastik botol',
-            //     'berat_sampah' => 1,
-            //     'poin_sampah' => 500,
-            // ]);
-            // KategoriSampah::create([
-            //     'admin_id' => $admin->id,
-            //     'jenis_sampah' => 'alimunium',
-            //     'berat_sampah' => 1,
-            //     'poin_sampah' => 700,
-            // ]);
-            // Point::create([
-            //     'admin_id' => $admin->id,
-            //     'jumlah_poin' => 10000,
-            //     'jumlah_saldo' => 10000,
-            // ]);
-        }
-        $user = User::create([
-            'username' => 'petugas1@gmail.com',
-            'status' => 'aktif',
-            'password' => bcrypt('123456789'),
-            'role' => 'petugas',
-        ]);
-        if ($user) {
-            Petugas::create([
-                'name' => 'petugas1',
-                'no_hp' => '08675756',
-                // 'email' => 'petugas@petugas.com',
-                'alamat' => 'jalan nanas',
-                'admin_id' => $admin->id,
-                'user_id' => $user->id,
-            ]);
-        }
+        // $user = User::create([
+        //     'username' => 'admin@gmail.com',
+        //     'status' => 'aktif',
+        //     'password' => bcrypt('123456789'),
+        //     'role' => 'admin',
+        // ]);
+        // if ($user) {
+        //     $admin = Admin::create([
+        //         'name' => 'admin',
+        //         'user_id' => $user->id,
+        //         'instansi' => 'DLH Indramayu',
+        //     ]);
+        //     KategoriSampah::create([
+        //         'admin_id' => $admin->id,
+        //         'jenis_sampah' => 'plastik botol',
+        //         'berat_sampah' => 1,
+        //         'poin_sampah' => 500,
+        //     ]);
+        //     KategoriSampah::create([
+        //         'admin_id' => $admin->id,
+        //         'jenis_sampah' => 'alimunium',
+        //         'berat_sampah' => 1,
+        //         'poin_sampah' => 700,
+        //     ]);
+        // }
+        // $user = User::create([
+        //     'username' => 'petugas1@gmail.com',
+        //     'status' => 'aktif',
+        //     'password' => bcrypt('123456789'),
+        //     'role' => 'petugas',
+        // ]);
+        // if ($user) {
+        //     Petugas::create([
+        //         'name' => 'petugas1',
+        //         'no_hp' => '08675756',
+        //         // 'email' => 'petugas@petugas.com',
+        //         'alamat' => 'jalan nanas',
+        //         'admin_id' => $admin->id,
+        //         'user_id' => $user->id,
+        //     ]);
+        // }
         $user = User::create([
             'username' => 'admin1@gmail.com',
             'status' => 'aktif',
@@ -175,6 +170,9 @@ class DatabaseSeeder extends Seeder
             'no_telp' => '087848512592',
             'email' => 'aplikasiaims@gmail.com',
             'alamat' => 'Jalan nanas ',
+        ]);
+        $this->call([
+            KategoriSampahSeeder::class,
         ]);
     }
 }

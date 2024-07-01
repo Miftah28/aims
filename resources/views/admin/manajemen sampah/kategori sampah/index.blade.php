@@ -2,7 +2,7 @@
 
 @section('main-content')
 <div class="row justify-content-between">
-    <div class="col-lg-11">
+    <div class="col-lg-10">
         <div class="pagetitle">
             <h1>Kelola Kategori Sampah</h1>
             <nav>
@@ -14,7 +14,7 @@
             </nav>
         </div><!-- End Page Title -->
     </div>
-    <div class="col-lg-1">
+    <div class="col-lg-2 text-end">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create"><i
                 class="bi bi-plus-lg"></i> Tambah</button>
     </div>

@@ -10,7 +10,7 @@ class Point extends Model
     use HasFactory;
     protected $fillable = [
         'admin_id',
-        'kategori_sampah_id',
+        // 'kategori_sampah_id',
         'jumlah_poin',
         'jumlah_saldo',
     ];
