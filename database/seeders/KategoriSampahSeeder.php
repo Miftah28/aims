@@ -51,13 +51,13 @@ class KategoriSampahSeeder extends Seeder
             ]);
             KategoriSampah::create([
                 'admin_id' => $admin->id,
-                'jenis_sampah' => 'Arsip',
+                'jenis_sampah' => 'Arsip (HVS, Arsip dan Buku Tulis berbahan HVS tanpa Cover)',
                 'berat_sampah' => 1,
                 'poin_sampah' => 1800,
             ]);
             KategoriSampah::create([
                 'admin_id' => $admin->id,
-                'jenis_sampah' => 'Koran Bagus',
+                'jenis_sampah' => 'Koran',
                 'berat_sampah' => 1,
                 'poin_sampah' => 3400,
             ]);
@@ -69,15 +69,9 @@ class KategoriSampahSeeder extends Seeder
             ]);
             KategoriSampah::create([
                 'admin_id' => $admin->id,
-                'jenis_sampah' => 'Dus/Kardus',
+                'jenis_sampah' => 'Majalah',
                 'berat_sampah' => 1,
-                'poin_sampah' => 1600,
-            ]);
-            KategoriSampah::create([
-                'admin_id' => $admin->id,
-                'jenis_sampah' => 'Kertas Campur',
-                'berat_sampah' => 1,
-                'poin_sampah' => 400,
+                'poin_sampah' => 500,
             ]);
             KategoriSampah::create([
                 'admin_id' => $admin->id,
@@ -99,9 +93,9 @@ class KategoriSampahSeeder extends Seeder
             ]);
             KategoriSampah::create([
                 'admin_id' => $admin->id,
-                'jenis_sampah' => 'Beling',
+                'jenis_sampah' => 'Tutup Botol',
                 'berat_sampah' => 1,
-                'poin_sampah' => 200,
+                'poin_sampah' => 3000,
             ]);
 
             //poin

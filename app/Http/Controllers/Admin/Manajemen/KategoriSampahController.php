@@ -22,8 +22,8 @@ class KategoriSampahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_sampah' => 'required|string|max:25',
-            'berat_sampah' => 'required|integer|max:100|min:1',
+            'jenis_sampah' => 'required|string|max:255',
+            'berat_sampah' => 'required|integer|max:1000|min:1',
             'poin_sampah' => 'required|integer|max:1000000',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Format dan ukuran gambar yang diizinkan
         ]);
@@ -46,8 +46,8 @@ class KategoriSampahController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jenis_sampah' => 'required|string|max:25',
-            'berat_sampah' => 'required|integer|max:100|min:1',
+            'jenis_sampah' => 'required|string|max:255',
+            'berat_sampah' => 'required|integer|max:1000|min:1',
             'poin_sampah' => 'required|integer|max:1000000',
         ]);
 

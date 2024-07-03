@@ -15,7 +15,7 @@
                             <div class="col-12 mb-3">
                                 <label for="lokasi_id" class="form-label"><span style="color: red;">*</span>
                                     lokasi</label>
-                                <select class="selectpicker" data-live-search="true" data-width="100%" name="lokasi_id">
+                                <select class="selectpicker" data-live-search="true" data-width="100%" name="lokasi_id" required>
                                     <option value="">Pilih lokasi</option>
                                     @forelse ($lokasi as $lokasis)
                                     <option value="{{ $lokasis->id }}">{{ $lokasis->tempat }}</option>
