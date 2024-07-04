@@ -28,7 +28,8 @@
                                 <div class="card-body">
 
                                     <div class="pt-4 pb-2">
-                                        <h5 class="card-title text-center pb-0 fs-4" style="color: #009970">Masuk Akun Anda</h5>
+                                        <h5 class="card-title text-center pb-0 fs-4" style="color: #009970">Masuk Akun
+                                            Anda</h5>
                                         <p class="text-center small">Masukan Username/Email Dan Password Anda</p>
                                     </div>
 
@@ -37,12 +38,13 @@
                                         @csrf
 
                                         <div class="col-12">
-                                            <label for="username" class="form-label" >Username/Email</label>
+                                            <label for="username" class="form-label">Username/Email</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="username" class="form-control" id="username"
                                                     required>
-                                                <div class="invalid-feedback">Tolong masukan username atau email anda.</div>
+                                                <div class="invalid-feedback">Tolong masukan username atau email anda.
+                                                </div>
                                             </div>
                                         </div>
 
@@ -57,7 +59,13 @@
                                         </div>
                                         <div class="col-12">
                                             <p class="small mb-0">Belum Memiliki akun? <a
-                                                    href="{{route('register.index')}}" style="color: #009970">Buat Akun</a></p>
+                                                    href="{{route('register.index')}}" style="color: #009970">Buat
+                                                    Akun</a></p>
+                                            <br>
+                                            <p class="small mb-0">Apabila Lupa Password Silakan Hubungi
+                                                <a href="https://wa.me/{{onepige()->no_telp}}" target="_blank"
+                                                    rel="noopener noreferrer"> <i class="bi bi-whatsapp"></i></a>
+                                            </p>
                                         </div>
                                     </form>
 
