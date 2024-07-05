@@ -43,7 +43,7 @@ class RegisterController extends Controller
             $params1['user_id'] = $user->id;
             $admin = Admin::create($params1);
             if ($admin) {
-                alert()->success('Success', 'Data Berhasil Disimpan');
+                alert()->success('Success', 'Data Berhasil Disimpan, Silakan Tunggu konfirmasi dari Admin.');
             } else {
                 $user->delete();
                 alert()->error('Error', 'Data Gagal Disimpan');

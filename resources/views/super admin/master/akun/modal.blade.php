@@ -87,7 +87,7 @@
                         <input id="image" type="file" class="form-control preview-image" name="image"
                             value="{{ old('image') }}" accept="image/*">
                     </div>
-                    
+
                     @if ($akuns->role === 'superadmin')
                     <div class="mb-3">
                         <label for="username"> <span style="color: red;">*</span> Username</label>
@@ -210,10 +210,10 @@
                                     value="{{ old('alamat') }}" required></textarea>
                             </div>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="image" class="form-label"><span style="color: red;">*</span> image</label>
                             <input type="file" class="form-control" id="image" name="image" accept=".jpg, .jpeg, .png">
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
@@ -273,10 +273,10 @@
                                 <input id="instansi" type="text" class="form-control" name="instansi"
                                     value="{{ $petugas->admin->instansi }}" disabled>
                             </div>
-                            <div class="col-12 mb-3">
+                            {{-- <div class="col-12 mb-3">
                                 <label for="image" class="form-label"><span style="color: red;">*</span> image</label>
                                 <input type="file" class="form-control" id="image" name="image" accept=".jpg, .jpeg, .png">
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-6 mb-3">
                                 <label for="username" class="form-label"><span style="color: red;">*</span>
                                     Username</label>
@@ -321,7 +321,7 @@
                                 </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-6 mb-3">
                                 <label for="password-confirm" class="col-md-10 control-label">Konfirmasi Password</label>
                                 <input id="password-confirm{{ $petugas->id }}" type="password" class="form-control"
@@ -329,7 +329,7 @@
                                 <div id="password-error{{ $petugas->id }}" class="invalid-feedback" style="display: none;"></div>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
