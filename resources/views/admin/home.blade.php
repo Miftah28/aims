@@ -66,7 +66,7 @@
                 <!-- petugas Card -->
 
 
-                <div class="col-xxl-4 col-md-6">
+                <div class="col-xxl-8 col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Petugas Mendapatkan Pemasukan Sampah Terhbanyak Pada Tahun {{
@@ -82,7 +82,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Pemasukan Sampah Perkategori Sampah Tahun {{ date('Y')}}</h5>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <div class="col-xxl-6 col-md-6">
+                <div class="col-xxl-12 col-md-6">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Lokasi Penyumbang Sampah Pada Tahun {{ date('Y')}}</h5>

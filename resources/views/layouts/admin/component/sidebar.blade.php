@@ -103,9 +103,9 @@
                     </a>
                 </li>
                 <li>
-                    <a class="{{ request()->is('admin/master/pemasukan-pengeluaran-poin') ? 'active' : 'collapsed' }}"
-                        href="{{ route('Admin.master.pemasukan-pengeluaran-poin.index') }}">
-                        <i class="bi bi-circle"></i><span>Monitoring Pengeluaran Poin</span>
+                    <a class="{{ request()->is('admin/master/penukaran-poin') ? 'active' : 'collapsed' }}"
+                        href="{{ route('Admin.master.penukaran-poin.index') }}">
+                        <i class="bi bi-circle"></i><span>Monitoring Penukaran Poin</span>
                     </a>
                 </li>
             </ul>
@@ -141,7 +141,7 @@
                 <li>
                     <a class="{{ request()->is('admin/manajemen-sampah/kelola-jadwal') ? 'active' : 'collapsed' }}"
                         href="{{ route('Admin.manajemen-sampah.kelola-jadwal.index') }}">
-                        <i class="bi bi-circle"></i><span>Kelola Jawdal Penjemputan</span>
+                        <i class="bi bi-circle"></i><span>Kelola Jadwal Penjemputan</span>
                     </a>
                 </li>
                 <li>

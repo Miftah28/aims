@@ -104,7 +104,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     //  monitoring pemasukan sampah
     Route::get('admin/master/pemasukan-sampah', [MonitoringDataController::class, 'monitoringpemasukansampah'])->name('Admin.master.pemasukan-sampah.index');
     //  monitoring pengeluaran poin
-    Route::get('admin/master/pemasukan-pengeluaran-poin', [MonitoringDataController::class, 'monitoringpengeluaranpoin'])->name('Admin.master.pemasukan-pengeluaran-poin.index');
+    Route::get('admin/master/penukaran-poin', [MonitoringDataController::class, 'monitoringpenukaranpoin'])->name('Admin.master.penukaran-poin.index');
 
     // Manajemen sampah
     //  kelola poin

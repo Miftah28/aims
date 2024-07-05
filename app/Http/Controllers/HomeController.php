@@ -72,6 +72,7 @@ class HomeController extends Controller
             $sampahperbulan = [];
             for ($i = 0; $i < 12; $i++) {
                 $lokasisampahBulan = Sampah::whereMonth('tanggal', $i + 1)
+                    ->where('admin_id', Auth::user()->admin->id)
                     ->whereYear('created_at', now()->year)
                     ->sum('pemasukan_sampah');
 

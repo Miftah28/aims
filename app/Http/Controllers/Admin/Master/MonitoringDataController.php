@@ -17,11 +17,11 @@ class MonitoringDataController extends Controller
         // dd($pemasukan);
         return view('admin.master.monitoring pemasukan sampah.index', $data);
     }
-    public function monitoringpengeluaranpoin()
+    public function monitoringpenukaranpoin()
     {
         $pengeluaran = TukarPoint::where('admin_id', Auth::user()->admin->id)->whereNotNull('petugas_id')->where('status', 'tukar poin')->get();
         $data['pengeluaran'] = $pengeluaran;
         // dd($pengeluaran);
-        return view('admin.master.monitoring pengeluaran poin.index', $data);
+        return view('admin.master.monitoring penukaran poin.index', $data);
     }
 }
