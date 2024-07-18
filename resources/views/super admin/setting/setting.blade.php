@@ -53,7 +53,7 @@
                                     value="{{ $setting->no_telp }}" required>
                             </div>
                             <div class="col-6 mb-3">
-                                <label for="email"> <span style="color: red;">*</span> No Telepon</label>
+                                <label for="email"> <span style="color: red;">*</span> Email</label>
                                 <input type="email" name="email" id="email" class="form-control"
                                     value="{{ $setting->email }}" required>
                             </div>

@@ -18,7 +18,7 @@ class PemasukanSampahController extends Controller
 {
     public function index()
     {
-        $sampah = Sampah::where('admin_id', Auth::user()->admin->id)->get();
+        $sampah = Sampah::where('admin_id', Auth::user()->admin->id)->whereNull('petugas_id')->get();
         $kategorisampah = KategoriSampah::where('admin_id', Auth::user()->admin->id)->get();
         $poin = Point::where('admin_id', Auth::user()->admin->id)->get();
         $nasabah = Nasabah::all();

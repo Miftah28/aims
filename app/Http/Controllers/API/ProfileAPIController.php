@@ -82,4 +82,58 @@ class ProfileAPIController extends Controller
             ], 500);
         }
     }
+    public function cari($email)
+    {
+        $carinasabah = User::where('username', $email)->first();
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'carinasabah' => $carinasabah,
+                // 'lokasi' => $lokasi
+            ],
+            'message' => 'Sukses menampilkan data'
+        ]);
+    }
+    public function ubahpassword(Request $request, $id)
+    {
+        $request->validate([
+            'password' => [
+                'nullable',
+                'string',
+                'min:8',
+                'confirmed',
+            ],
+        ]);
+
+        try {
+            $params = $request->all();
+            $user = User::findOrFail($id);
+            // dd($user);
+            if ($request->filled('password')) {
+                $params['password'] = Hash::make($request->password);
+            } else {
+                $params = $request->except('password');
+            }
+
+            if ($user->update($params)) {
+                return response()->json([
+                    'success' => true,
+                    'data' => [
+                        'user' => $user
+                    ],
+                    'message' => 'Sukses mengubah data'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Gagal mengubah data',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
 }
