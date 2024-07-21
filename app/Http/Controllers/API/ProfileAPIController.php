@@ -82,9 +82,10 @@ class ProfileAPIController extends Controller
             ], 500);
         }
     }
-    public function cari($email)
+    public function cari(Request $request)
     {
-        $carinasabah = User::where('username', $email)->first();
+        $params = $request->all();
+        $carinasabah = User::where('username', $params)->first();
         return response()->json([
             'success' => true,
             'data' => [
