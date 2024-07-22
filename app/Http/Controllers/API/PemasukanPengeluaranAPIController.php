@@ -136,6 +136,94 @@ class PemasukanPengeluaranAPIController extends Controller
             }
         }
     }
+    public function pengajuan(Request $request)
+    {
+        $params1 = $request->all();
+        $caripoint = PoinNasabah::where('nasabah_id', Auth::user()->nasabah->id)->first();
+        // dd($caripoint->total);
+        $lihatpoin = Point::where('id', $request->poin_id)->first();
+        $cekpoint = $caripoint->total - $lihatpoin->jumlah_poin;
+        // dd($lihatpoin);
+        if ($caripoint->total == 0 || $cekpoint < 0) {
+            // alert()->warning('Warning', 'Poin ' . $caripoint->nasabah->name . ' kurang.' . 'Saldo yang dimiliki: ' . $caripoint->total);
+            return response()->json([
+                'error' => true,
+                'message' => 'Saldo kurang'
+            ], 500);
+        } else {
+            $params1['status'] = 'proses';
+            $params1['tanggal'] = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+            // $params1['petugas_id'] = Auth::user()->petugas->id;
+            // $params1['admin_id'] = Auth::user()->petugas->admin->id;
+            // $params1['instansi'] = Auth::user()->petugas->admin->instansi;
+            $params1['point_id'] = $request->poin_id;
+            $params1['kurang_poin'] = $lihatpoin->jumlah_poin;
+            $params1['nasabah_id'] = Auth::user()->nasabah->id;
+            $params1['instansi'] = 'DLH Indramayu';
+            // $point = KategoriSampah::where('id', $request->input('poin_id'))->first();
+            // $params1['kategori_sampah_id'] = $point->id;
+            $tukarpoin = TukarPoint::create($params1);
+            // $hitungpoin = $caripoint->total - $tukarpoin->kurang_poin;
+            // $params2 = ['total' => $hitungpoin,];
+            // $caripoint->update($params2);
+            // if ($tukarpoin && $caripoint) {
+            if ($tukarpoin) {
+                return response()->json([
+                    'success' => true,
+                    'data' => [
+                        'tukarpoin' => $tukarpoin,
+                        // 'caripoint' => $caripoint,
+                    ],
+                    'message' => 'Sukses simpan'
+                ]);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Gagal simpan data nasabah'
+                ], 500);
+            }
+        }
+    }
+    public function terima(Request $request, $id)
+    {
+        $params1 = $request->all();
+        $caripengajuan = TukarPoint::where('id', $id)->first();
+        $caripoint = PoinNasabah::where('nasabah_id', $caripengajuan->nasabah->id)->first();
+        // dd($caripoint->total);
+        $params1['admin_id'] = Auth::user()->petugas->admin->id;
+        $params1['petugas_id'] = Auth::user()->petugas->id;
+        $params1['status'] = 'tukar poin';
+        $hitungpoin = $caripoint->total - $caripengajuan->kurang_poin;
+        $params2 = ['total' => $hitungpoin,];
+        $caripoint->update($params2);
+        if ($caripengajuan->update($params1) && $caripoint) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'tukarpoin' => $caripengajuan,
+                    // 'caripoint' => $caripoint,
+                ],
+                'message' => 'Sukses simpan'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Gagal simpan data nasabah'
+            ], 500);
+        }
+        // dd($params1);
+    }
+    public function munculkanpoin()
+    {
+        $poin = Point::where('admin_id', 2)->get();
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'poin' => $poin,
+            ],
+            'message' => 'Sukses menampilkan data'
+        ]);
+    }
     public function lihatriwayattukarpoin()
     {
         $tukar = TukarPoint::where('status', 'tukar poin')->where('petugas_id', Auth::user()->petugas->id)->get();
